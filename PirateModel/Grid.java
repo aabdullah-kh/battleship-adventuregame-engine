@@ -1,6 +1,33 @@
 package PirateModel;
 
+/**
+ * Class Grid
+ * Container for the game grid.
+*/
 public class Grid {
 
-    private TileContainer[] grid;
+    private TileContainer[][] grid;
+
+    /**
+     * Grid Constructor
+     * --------------------
+     * Initializes grid 2D Array
+     * @param x The width of the grid, in Tiles
+     * @param y The height of the grid, in Tiles
+     */
+    public Grid(int x, int y) {
+        grid = new TileContainer[x][y];
+    }
+
+    /**
+     * getTileContainer
+     * --------------------
+     * returns a TileContainer at (x, y)
+     * @param x Position x of TileContainer
+     * @param y Position y of TileContainer
+     */
+    public TileContainer getTileContainer(int x, int y) {
+        return grid[x][y];
+    }
+
 }
