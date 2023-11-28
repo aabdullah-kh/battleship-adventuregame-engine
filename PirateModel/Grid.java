@@ -20,11 +20,12 @@ public class Grid {
     }
 
     /**
-     * getTileContainer
-     * --------------------
-     * returns a TileContainer at (x, y)
+     * Returns a TileContainer at (x, y)
+     *
      * @param x Position x of TileContainer
      * @param y Position y of TileContainer
+     *
+     * @return The TileContainer at position (x, y)
      */
     public TileContainer getTileContainer(int x, int y) {
         return grid[x][y];
