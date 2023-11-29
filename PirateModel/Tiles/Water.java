@@ -5,7 +5,8 @@ import PirateModel.Entity;
 public class Water extends Tile {
 
     public Water() {
-
+        this.SYMBOL = '~';
+        this.Name = "WATER";
     }
 
     @Override
