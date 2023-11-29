@@ -1,4 +1,7 @@
-package PirateModel;
+package PirateModel.Tiles;
+
+import PirateModel.Entity;
+import PirateModel.Loot;
 
 public class TreasureIsland extends Island {
 

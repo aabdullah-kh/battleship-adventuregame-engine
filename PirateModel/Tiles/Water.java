@@ -1,4 +1,6 @@
-package PirateModel;
+package PirateModel.Tiles;
+
+import PirateModel.Entity;
 
 public class Water extends Tile {
 

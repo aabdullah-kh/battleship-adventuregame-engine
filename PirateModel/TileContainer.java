@@ -1,5 +1,7 @@
 package PirateModel;
 
+import PirateModel.Tiles.Tile;
+
 import java.util.ArrayList;
 
 public class TileContainer {

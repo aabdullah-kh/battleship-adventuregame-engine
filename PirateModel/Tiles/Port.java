@@ -1,4 +1,7 @@
-package PirateModel;
+package PirateModel.Tiles;
+
+import PirateModel.Inventory;
+import PirateModel.Ship;
 
 import java.util.HashMap;
 
