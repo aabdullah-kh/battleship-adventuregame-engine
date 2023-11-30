@@ -11,11 +11,18 @@ public class Event {
         this.actions = actions;
     }
 
-    // Public methods
+    /**
+     * Returns event text
+     * @return Event Text
+     */
     public String getEventText() {
         return this.eventText;
     }
 
+    /**
+     * Returns action table, possible actions for this event
+     * @return action table
+     */
     public ActionTable getActionTable() {
         return this.actions;
     }

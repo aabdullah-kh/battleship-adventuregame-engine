@@ -1,6 +1,8 @@
 package PirateModel.Events;
 
-public class Action {
+import PirateModel.Entity;
+
+public abstract class Action {
     // Attributes
     private String label;
     private boolean forcedAction;
@@ -14,21 +16,19 @@ public class Action {
     }
 
     // Public methods
-    public void execute(Entity entity) {
-        // Implementation of the method
-    }
+    public abstract void execute(Entity entity);
 
-    public String getLabel(Entity entity) {
+    public String getLabel() {
         // Return label based on entity, if needed
         return this.label;
     }
 
-    public Boolean getForced(Entity entity) {
+    public Boolean isForced() {
         // Return forcedAction based on entity, if needed
         return this.forcedAction;
     }
 
-    public Boolean getHidden(Entity entity) {
+    public Boolean isHidden() {
         // Return hidden based on entity, if needed
         return this.hidden;
     }
@@ -37,9 +37,5 @@ public class Action {
     private void changeForced() {
         this.forcedAction = !this.forcedAction;
     }
-}
-
-class Entity {
-    // Implementation of Entity class
 }
 
