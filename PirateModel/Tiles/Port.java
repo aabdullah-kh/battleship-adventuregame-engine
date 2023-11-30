@@ -1,8 +1,6 @@
 package PirateModel.Tiles;
 
-import PirateModel.Entity;
 import PirateModel.Events.Event;
-import PirateModel.Inventory;
 import PirateModel.Ship;
 
 import java.util.HashMap;

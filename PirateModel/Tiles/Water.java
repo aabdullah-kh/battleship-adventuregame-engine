@@ -1,6 +1,5 @@
 package PirateModel.Tiles;
 
-import PirateModel.Entity;
 import PirateModel.Events.Event;
 
 public class Water extends Tile {

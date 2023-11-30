@@ -18,6 +18,5 @@ public abstract class Tile {
     }
 
     public void onEnter(Entity entity) {
-        return;
     }
 }

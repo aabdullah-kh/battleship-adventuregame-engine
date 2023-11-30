@@ -15,7 +15,7 @@ public class ActionTable {
 
     /**
      * Returns action if visible and executes them if forced
-     * @return
+     * @return applicable actions
      */
     public Action[] parseActions(Entity entity) {
         
