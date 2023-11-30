@@ -1,5 +1,7 @@
 package PirateModel.Tiles;
 
+import PirateModel.Entity;
+import PirateModel.Events.Event;
 import PirateModel.Inventory;
 import PirateModel.Ship;
 
@@ -7,9 +9,12 @@ import java.util.HashMap;
 
 public class Port extends Island {
 
-    private HashMap<String, Ship> upgradeShop;
+    protected HashMap<String, Ship> upgradeShop;
 
-    public boolean buyShip(Inventory inventory) {
-        throw new UnsupportedOperationException("Not implemented!");
+    public Port(Event event) {
+        super(event);
+        this.Name = "PORT";
+        this.SYMBOL = '#';
     }
+
 }

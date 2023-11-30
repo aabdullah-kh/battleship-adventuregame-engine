@@ -1,6 +1,7 @@
 package PirateModel.Tiles;
 
 import PirateModel.Entity;
+import PirateModel.Events.Event;
 
 public abstract class Tile {
 
@@ -8,5 +9,15 @@ public abstract class Tile {
 
     protected String Name;
 
-    public abstract void onEnter(Entity entity);
+    protected Event event;
+
+    public Tile(char SYMBOL, String Name, Event event) {
+        this.Name = Name;
+        this.SYMBOL = SYMBOL;
+        this.event = event;
+    }
+
+    public void onEnter(Entity entity) {
+        return;
+    }
 }
