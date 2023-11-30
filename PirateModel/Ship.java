@@ -14,14 +14,16 @@ public class Ship {
 
     private int damage;
 
-    public HashMap<String, Object> getStats() {
-        HashMap<String, Object> stats = new HashMap<>();
+    public String getName() {
+        return this.name;
+    }
 
-        stats.put("Name", this.name);
-        stats.put("Health", this.health);
-        stats.put("Damage", this.damage);
+    public int getHealth() {
+        return this.health;
+    }
 
-        return stats;
+    public int getDamage() {
+        return this.damage;
     }
 
     public boolean shoot(Entity entity, int x, int y) {
