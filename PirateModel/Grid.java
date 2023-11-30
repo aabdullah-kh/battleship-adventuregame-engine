@@ -1,5 +1,7 @@
 package PirateModel;
 
+import PirateModel.Tiles.TileContainer;
+
 /**
  * Class Grid
  * Container for the game grid.

@@ -1,6 +1,6 @@
 package PirateModel.Events;
 
-import PirateModel.Entity;
+import PirateModel.Entities.Entity;
 
 public class Battle extends Action{
     public Battle(String label, boolean forcedAction, boolean hidden) {

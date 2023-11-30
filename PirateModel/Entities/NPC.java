@@ -1,4 +1,4 @@
-package PirateModel;
+package PirateModel.Entities;
 
 import java.util.ArrayList;
 import java.util.Random;

@@ -1,4 +1,6 @@
-package PirateModel;
+package PirateModel.Loot;
+
+import PirateModel.Entities.Entity;
 
 public class PowerUp extends UsableItem {
 

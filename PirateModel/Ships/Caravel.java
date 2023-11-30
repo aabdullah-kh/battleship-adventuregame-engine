@@ -1,6 +1,6 @@
-package PirateModel;
+package PirateModel.Ships;
 
-public class Barque extends Ship {
+public class Caravel extends Ship {
 
     private int xCoord;
 
@@ -12,7 +12,7 @@ public class Barque extends Ship {
 
     private final int damage;
 
-    public Barque(String name, int health, int damage) {
+    public Caravel(String name, int health, int damage) {
         this.name = name;
         this.health = health;
         this.damage = damage;

@@ -1,6 +1,8 @@
-package PirateModel;
+package PirateModel.Entities;
 
-abstract class Entity {
+import PirateModel.Ships.Ship;
+
+public abstract class Entity {
 
     private String ID;
 

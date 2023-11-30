@@ -1,4 +1,4 @@
-package PirateModel;
+package PirateModel.Loot;
 
 public class Loot {
 

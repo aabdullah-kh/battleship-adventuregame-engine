@@ -1,4 +1,7 @@
-package PirateModel;
+package PirateModel.Entities;
+
+import PirateModel.Loot.Loot;
+import PirateModel.Ships.Ship;
 
 public class Inventory {
 

@@ -1,5 +1,6 @@
-package PirateModel;
+package PirateModel.Tiles;
 
+import PirateModel.Entities.Entity;
 import PirateModel.Tiles.Tile;
 
 import java.util.ArrayList;
@@ -10,15 +11,18 @@ public class TileContainer {
 
     private Tile tile;
 
+    private int[] location;
+
     /**
      * TileContainer Constructor
      * --------------------
      * Initializes TileContainer with a Terrain Tile and an empty list Entity(entities)
      * @param tile the tile which this tileContainer will contain
      */
-    public TileContainer (Tile tile) {
+    public TileContainer (Tile tile, int x, int y) {
         this.tile = tile;
         entities = new ArrayList<>();
+        location = new int[] {x, y};
     }
 
     /**

@@ -1,6 +1,6 @@
-package PirateModel;
+package PirateModel.Ships;
 
-import java.util.HashMap;
+import PirateModel.Entities.Entity;
 
 public class Ship {
 

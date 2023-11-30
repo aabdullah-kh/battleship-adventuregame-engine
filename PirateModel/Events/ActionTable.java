@@ -1,6 +1,6 @@
 package PirateModel.Events;
 
-import PirateModel.Entity;
+import PirateModel.Entities.Entity;
 
 import java.util.ArrayList;
 

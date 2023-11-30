@@ -1,7 +1,7 @@
 package PirateModel.Tiles;
 
 import PirateModel.Events.Event;
-import PirateModel.Ship;
+import PirateModel.Ships.Ship;
 
 import java.util.HashMap;
 

@@ -1,6 +1,6 @@
 package PirateModel.Tiles;
 
-import PirateModel.Entity;
+import PirateModel.Entities.Entity;
 import PirateModel.Events.Event;
 
 public abstract class Tile {

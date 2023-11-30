@@ -1,5 +1,8 @@
 package PirateModel;
 
+import PirateModel.Entities.NPC;
+import PirateModel.Entities.Player;
+
 /**
  * Class Battlecontroller
  * ---------------------
