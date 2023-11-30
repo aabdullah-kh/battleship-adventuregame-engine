@@ -1,6 +1,6 @@
 package PirateModel;
 
-public class Entity {
+abstract class Entity {
 
     private String ID;
 
@@ -24,7 +24,7 @@ public class Entity {
         throw new UnsupportedOperationException("Not implemented!");
     }
 
-    public boolean move(String position) {
-        throw new UnsupportedOperationException("Not implemented!");
-    }
+    public boolean move(String position) {throw new UnsupportedOperationException("Not implemented!");}
+
+    public abstract void nextMove();
 }
