@@ -1,6 +1,7 @@
 package PirateModel.Entities;
 
 import PirateModel.Ships.Ship;
+import PirateModel.TileContainer;
 
 public abstract class Entity {
 
@@ -9,6 +10,8 @@ public abstract class Entity {
     private Inventory inventory;
 
     private Ship ship;
+
+    private TileContainer currentTile;
 
     public String getID() {
         return this.ID;
@@ -26,7 +29,9 @@ public abstract class Entity {
         throw new UnsupportedOperationException("Not implemented!");
     }
 
-    public boolean move(String position) {throw new UnsupportedOperationException("Not implemented!");}
+    public boolean move(String dir) {
+        return (boolean) currentTile.moveEntity(this, dir)[0];
+    }
 
     public abstract void nextMove();
 }

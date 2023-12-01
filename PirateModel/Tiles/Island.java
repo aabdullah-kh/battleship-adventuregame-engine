@@ -6,6 +6,7 @@ public class Island extends Tile {
 
     public Island(Event event) {
         super('□', "ISLAND", event);
+        shipAccessible = false;
     }
 
 }
