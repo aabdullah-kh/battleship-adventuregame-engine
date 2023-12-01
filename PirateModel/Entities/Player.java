@@ -11,7 +11,7 @@ public class Player extends Entity{
 
         switch (command[0]) {
             case "MOVE" -> {
-
+                move(command[1]);
             }
             case "FIRE" -> {
 
