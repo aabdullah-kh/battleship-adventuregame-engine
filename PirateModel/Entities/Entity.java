@@ -1,5 +1,6 @@
 package PirateModel.Entities;
 
+import PirateModel.MovementMediator;
 import PirateModel.Ships.Ship;
 import PirateModel.TileContainer;
 
@@ -12,6 +13,8 @@ public abstract class Entity {
     private Ship ship;
 
     private TileContainer currentTile;
+
+    private MovementMediator mover;
 
     public String getID() {
         return this.ID;
@@ -30,7 +33,7 @@ public abstract class Entity {
     }
 
     public boolean move(String dir) {
-        return (boolean) currentTile.moveEntity(this, dir)[0];
+        return (boolean) mover.receiveNotification(this, dir);
     }
 
     public abstract void nextMove();
