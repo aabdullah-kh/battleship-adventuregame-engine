@@ -44,12 +44,13 @@ public abstract class Entity {
     }
 
     public boolean changeShip(Ship ship) {
-        throw new UnsupportedOperationException("Not implemented!");
+        this.ship = ship;
+        return true;
     }
 
     public boolean move(String dir) {
         return (boolean) mover.receiveNotification(this, dir);
     }
 
-    public abstract void nextMove();
+    public abstract void nextMove(Entity entity);
 }
