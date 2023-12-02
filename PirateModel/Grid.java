@@ -8,10 +8,21 @@ public class Grid {
 
     private TileContainer[][] grid;
 
+
     /**
      * Grid Constructor
      * --------------------
-     * Initializes grid 2D Array
+     * Initializes grid 2D Array with Tile data
+     * @param tileData 2D Array of TileContainer Objects
+     */
+    public Grid(TileContainer[][] tileData) {
+        grid = tileData;
+    }
+
+    /**
+     * Grid Alternate Constructor
+     * --------------------
+     * Initializes empty grid 2D Array
      * @param x The width of the grid, in Tiles
      * @param y The height of the grid, in Tiles
      */
