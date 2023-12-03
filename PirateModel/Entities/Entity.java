@@ -22,7 +22,7 @@ public abstract class Entity {
         this.currentTile = currentTile;
         this.mover = mover;
         inventory = new Inventory();
-        ship = new Caravel();
+        //ship = new Caravel();
     }
 
     public Entity(String ID, TileContainer currentTile, MovementMediator mover, Inventory inventory, Ship ship) {

@@ -1,7 +1,6 @@
 package PirateModel;
 
 import PirateModel.Entities.Entity;
-import PirateModel.Tiles.Tile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +22,7 @@ public class MovementMediator {
 
     //temp constructor for testing purposes ONLY
 
+    public MovementMediator(){}
 
     public boolean receiveNotification(Entity entity, String dir) {
         TileContainer origin = entityTiles.get(entity.getID());
@@ -45,30 +45,14 @@ public class MovementMediator {
 
         try {
             switch (dir) {
-                case "N" -> {
-                    targetTile = grid.getTileContainer(tile.getXPos(), tile.getYPos() + 1);
-                }
-                case "NW" -> {
-                    targetTile = grid.getTileContainer(tile.getXPos() + 1, tile.getYPos() + 1);
-                }
-                case "W" -> {
-                    targetTile = grid.getTileContainer(tile.getXPos() + 1, tile.getYPos());
-                }
-                case "SW" -> {
-                    targetTile = grid.getTileContainer(tile.getXPos() + 1, tile.getYPos() - 1);
-                }
-                case "S" -> {
-                    targetTile = grid.getTileContainer(tile.getXPos(), tile.getYPos() - 1);
-                }
-                case "SE" -> {
-                    targetTile = grid.getTileContainer(tile.getXPos() - 1, tile.getYPos() - 1);
-                }
-                case "E" -> {
-                    targetTile = grid.getTileContainer(tile.getXPos() - 1, tile.getYPos());
-                }
-                case "NE" -> {
-                    targetTile = grid.getTileContainer(tile.getXPos() - 1, tile.getYPos() + 1);
-                }
+                case "N" -> targetTile = grid.getTileContainer(tile.getXPos(), tile.getYPos() + 1);
+                case "NW" -> targetTile = grid.getTileContainer(tile.getXPos() + 1, tile.getYPos() + 1);
+                case "W" -> targetTile = grid.getTileContainer(tile.getXPos() + 1, tile.getYPos());
+                case "SW" -> targetTile = grid.getTileContainer(tile.getXPos() + 1, tile.getYPos() - 1);
+                case "S" -> targetTile = grid.getTileContainer(tile.getXPos(), tile.getYPos() - 1);
+                case "SE" -> targetTile = grid.getTileContainer(tile.getXPos() - 1, tile.getYPos() - 1);
+                case "E" -> targetTile = grid.getTileContainer(tile.getXPos() - 1, tile.getYPos());
+                case "NE" -> targetTile = grid.getTileContainer(tile.getXPos() - 1, tile.getYPos() + 1);
                 default -> {
                     return null;
                 }
