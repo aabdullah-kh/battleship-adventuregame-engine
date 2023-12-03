@@ -2,19 +2,34 @@ package PirateModel.Ships;
 
 public class Galley extends Ship {
 
+    /**
+     * The x-coordinate of the Ship.
+     */
     private int xCoord;
 
+    /**
+     * The y-coordinate of the Ship.
+     */
     private int yCoord;
 
-    private final String name;
+    /**
+     * The name of the Ship.
+     */
+    private String name;
 
-    private final int health;
+    /**
+     * The Ship's current health.
+     */
+    private int health;
 
-    private final int damage;
+    /**
+     * The Ship cannons damage per shot.
+     */
+    private int damage;
 
-    public Galley(String name, int health, int damage) {
-        this.name = name;
-        this.health = health;
-        this.damage = damage;
+    public Galley() {
+        this.name = "Galley";
+        this.health = 125;
+        this.damage = 80;
     }
 }
