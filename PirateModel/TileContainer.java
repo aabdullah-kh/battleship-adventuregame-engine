@@ -9,6 +9,8 @@ public class TileContainer {
 
     private Tile tile;
 
+    private int ID; //will be unique when loading
+
     private int xPos;
 
     private int yPos;
@@ -30,5 +32,7 @@ public class TileContainer {
     public int getXPos() { return xPos; }
     public int getYPos() {return yPos; }
 
-    public Tile getTile () { return tile; }
+    public Tile getTile() { return tile; }
+
+    public int getID() { return ID; }
 }

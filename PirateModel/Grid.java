@@ -6,6 +6,8 @@ package PirateModel;
 */
 public class Grid {
 
+    private int ID;
+
     private TileContainer[][] grid;
 
 
@@ -15,7 +17,8 @@ public class Grid {
      * Initializes grid 2D Array with Tile data
      * @param tileData 2D Array of TileContainer Objects
      */
-    public Grid(TileContainer[][] tileData) {
+    public Grid(int ID, TileContainer[][] tileData) {
+        this.ID = ID;
         grid = tileData;
     }
 
@@ -26,7 +29,8 @@ public class Grid {
      * @param x The width of the grid, in Tiles
      * @param y The height of the grid, in Tiles
      */
-    public Grid(int x, int y) {
+    public Grid(int ID, int x, int y) {
+        this.ID = ID;
         grid = new TileContainer[x][y];
     }
 
@@ -40,6 +44,10 @@ public class Grid {
      */
     public TileContainer getTileContainer(int x, int y) {
         return grid[x][y];
+    }
+
+    public int getID() {
+        return this.ID;
     }
 
 }

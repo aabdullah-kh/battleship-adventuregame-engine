@@ -1,12 +1,13 @@
 package PirateModel.Entities;
 
 import PirateModel.MovementMediator;
+import PirateModel.Ships.Caravel;
 import PirateModel.Ships.Ship;
 import PirateModel.TileContainer;
 
 public abstract class Entity {
 
-    private String ID;
+    private String ID; //must be unique
 
     private Inventory inventory;
 
@@ -15,6 +16,20 @@ public abstract class Entity {
     private TileContainer currentTile;
 
     private MovementMediator mover;
+
+    public Entity(String ID, TileContainer currentTile, MovementMediator mover) {
+        this.ID = ID;
+        this.currentTile = currentTile;
+        this.mover = mover;
+        inventory = new Inventory();
+        ship = new Caravel();
+    }
+
+    public Entity(String ID, TileContainer currentTile, MovementMediator mover, Inventory inventory, Ship ship) {
+        this.ID = ID;
+        this.currentTile = currentTile;
+        this.mover = mover;
+    }
 
     public String getID() {
         return this.ID;

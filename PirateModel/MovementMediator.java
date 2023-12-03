@@ -16,23 +16,26 @@ import java.util.HashMap;
  */
 public class MovementMediator {
 
-    HashMap<Entity, TileContainer> entityTiles;
-    HashMap<TileContainer, ArrayList<Entity>> tileEntities;
+    private HashMap<String, TileContainer> entityTiles; //Entity.ID, TileContainer
+    private HashMap<Integer, ArrayList<Entity>> tileEntities; //TileContainer.ID, ArrayList<Entity>
 
-    HashMap<TileContainer, Grid> tileGrid;
+    private HashMap<Integer, Grid> tileGrid; //TileContainer.ID, Grid
+
+    //temp constructor for testing purposes ONLY
+
 
     public boolean receiveNotification(Entity entity, String dir) {
-        TileContainer origin = entityTiles.get(entity);
-        TileContainer target = findTarget(origin, tileGrid.get(origin), dir);
+        TileContainer origin = entityTiles.get(entity.getID());
+        TileContainer target = findTarget(origin, tileGrid.get(origin.getID()), dir);
 
         if (target == null) {
             return false;
         } else if (!target.getTile().isShipAccessible()) {
             return false;
         } else {
-            entityTiles.put(entity, target);
-            tileEntities.get(origin).remove(entity);
-            tileEntities.get(target).add(entity);
+            entityTiles.put(entity.getID(), target);
+            tileEntities.get(origin.getID()).remove(entity);
+            tileEntities.get(target.getID()).add(entity);
             return true;
         }
     }
@@ -76,5 +79,8 @@ public class MovementMediator {
         return targetTile;
     }
 
+    public TileContainer getEntityTile(Entity entity) {
+        return entityTiles.get(entity.getID());
+    }
 
 }
