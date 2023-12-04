@@ -20,9 +20,16 @@ public class MovementMediator {
 
     private HashMap<Integer, Grid> tileGrid; //TileContainer.ID, Grid
 
+    private HashMap<Integer, TileContainer> tileIDMap;
+
     //temp constructor for testing purposes ONLY
 
-    public MovementMediator(){}
+    public MovementMediator() {
+        entityTiles = new HashMap<>();
+        tileEntities = new HashMap<>();
+        tileGrid = new HashMap<>();
+        tileIDMap = new HashMap<>();
+    }
 
     public boolean receiveNotification(Entity entity, String dir) {
         TileContainer origin = entityTiles.get(entity.getID());
@@ -67,4 +74,17 @@ public class MovementMediator {
         return entityTiles.get(entity.getID());
     }
 
+    public HashMap<Integer, ArrayList<Entity>> getTileEntities() {
+        return tileEntities;
+    }
+
+    public HashMap<Integer, Grid> getTileGrid() {
+        return tileGrid;
+    }
+
+    public HashMap<String, TileContainer> getEntityTiles() {
+        return entityTiles;
+    }
+
+    public HashMap<Integer, TileContainer> getTileIDMap() { return tileIDMap; }
 }
