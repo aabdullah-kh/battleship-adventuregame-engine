@@ -53,4 +53,6 @@ public abstract class Entity {
     }
 
     public abstract void nextMove(Entity entity);
+
+    public TileContainer getCurrentTile() { return this.currentTile;}
 }
