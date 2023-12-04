@@ -30,4 +30,6 @@ public abstract class Tile {
     public String getName() { return Name; }
 
     public char getSymbol() { return SYMBOL; }
+
+    public Event getEvent() { return event; }
 }
