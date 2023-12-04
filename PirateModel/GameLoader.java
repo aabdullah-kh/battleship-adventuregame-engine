@@ -89,7 +89,7 @@ public class GameLoader {
                 default -> newEntity = new NPC((String) entityData.get("ID"), this.movementMediator);
             }
 
-            TileContainer entityTile = this.movementMediator.getTileIDMap().get(entityData.get("START_TILE_ID"));
+            TileContainer entityTile = this.movementMediator.getTileIDMap().get(( (Long) entityData.get("START_TILE_ID")).intValue());
 
             this.movementMediator.getEntityTiles().put((String) entityData.get("ID"), entityTile);
 
