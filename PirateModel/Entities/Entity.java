@@ -48,4 +48,8 @@ public abstract class Entity {
     }
 
     public abstract void nextMove();
+
+    public TileContainer getTileContainer() {
+        return mover.getEntityTiles().get(ID);
+    }
 }
