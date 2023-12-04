@@ -18,4 +18,12 @@ public class LoaderTest {
         assertEquals("PORT", grid.getTileContainer(0, 1).getTile().getName());
         assertEquals(2, grid.getTileContainer(3, 3).getID());
     }
+
+    @Test
+    void loadEntitiesTest() throws IOException, ParseException {
+        GameLoader gl = new GameLoader("ExampleGame");
+        Grid grid = gl.loadGrid("MainGrid");
+        gl.loadEntities();
+        assertEquals(1, gl.getMovementMediator().getTileEntities().get(grid.getTileContainer(3, 3).getID()).size());
+    }
 }

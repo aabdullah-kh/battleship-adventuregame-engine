@@ -1,5 +1,8 @@
 package PirateModel;
 
+import PirateModel.Entities.Entity;
+import PirateModel.Entities.NPC;
+import PirateModel.Entities.StoryNPC;
 import PirateModel.Tiles.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -9,12 +12,16 @@ import org.json.simple.parser.ParseException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GameLoader {
 
     String gamePath;
 
     JSONObject gameInfo;
+
+    MovementMediator movementMediator;
 
     public GameLoader(String gamePath) throws IOException, ParseException {
         this.gamePath = gamePath;
@@ -23,7 +30,15 @@ public class GameLoader {
         JSONParser parser = new JSONParser();
 
         this.gameInfo = (JSONObject) parser.parse(infoJSON);
+
+        movementMediator = new MovementMediator();
     }
+
+    public void loadGame() {
+
+    }
+
+
 
     public Grid loadGrid(String path) throws IOException, ParseException {   //TODO: MovementMediator integration
         String gridJSON = loadJSON(gamePath + "/" + path + "/grid.json");
@@ -37,17 +52,51 @@ public class GameLoader {
 
         TileContainer[][] newTileGrid = new TileContainer[width][height];
 
+        ArrayList<Integer> tileIDs = new ArrayList<>();
+
         for(int i = 0; i < width; i++) {
             JSONArray gridYArr = (JSONArray) gridArr.get(i);
             for(int j = 0; j < height; j++) {
                 JSONObject tCon = (JSONObject) gridYArr.get(j);
                 newTileGrid[i][j] = generateTileContainer(tCon, i, j, ((Long) gameInfo.get("reservedTileID")).intValue() + i * width + j);
+                tileIDs.add(newTileGrid[i][j].getID());
+
+                this.movementMediator.getTileIDMap().put(newTileGrid[i][j].getID(), newTileGrid[i][j]);
+                this.movementMediator.getTileEntities().put(newTileGrid[i][j].getID(), new ArrayList<>());
             }
         }
 
-        return new Grid(((Long) gridInfo.get("ID")).intValue(), newTileGrid);
-    }
+        Grid newGrid = new Grid(((Long) gridInfo.get("ID")).intValue(), newTileGrid);
 
+        for (int tileID: tileIDs) {
+            movementMediator.getTileGrid().put(tileID, newGrid);
+        }
+        return newGrid;
+    }
+    public void loadEntities() throws IOException, ParseException {
+        String entityJSON = loadJSON(gamePath + "/entities.json");
+        JSONParser parser = new JSONParser();
+        JSONArray entityArr = (JSONArray) parser.parse(entityJSON);
+
+        for(Object entityJSONData: entityArr){
+            JSONObject entityData = (JSONObject) entityJSONData;
+
+            Entity newEntity;
+
+            switch ((String) entityData.getOrDefault("TYPE", "NPC")) {
+                case "NPC" -> newEntity = new NPC((String) entityData.get("ID"), this.movementMediator);
+                case "STORYNPC" -> newEntity = new StoryNPC((String) entityData.get("ID"), this.movementMediator);
+                default -> newEntity = new NPC((String) entityData.get("ID"), this.movementMediator);
+            }
+
+            TileContainer entityTile = this.movementMediator.getTileIDMap().get(entityData.get("START_TILE_ID"));
+
+            this.movementMediator.getEntityTiles().put((String) entityData.get("ID"), entityTile);
+
+            this.movementMediator.getTileEntities().get(( (Long) entityData.get("START_TILE_ID")).intValue()).add(newEntity);
+
+        }
+    }
     private TileContainer generateTileContainer(JSONObject object, int x, int y, int defaultID) {
         Tile newTile;
 
@@ -66,20 +115,21 @@ public class GameLoader {
         StringBuilder JSONTextBuilder = new StringBuilder();
         String JSONText;
 
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+        BufferedReader reader = new BufferedReader(new FileReader(fileName));
 
-            String line = "";
-            while (line != null) {
-                JSONTextBuilder.append(line);
-                line = reader.readLine();
-            }
-            JSONText = JSONTextBuilder.toString();
+        String line = "";
+        while (line != null) {
+            JSONTextBuilder.append(line);
+            line = reader.readLine();
         }
-        catch (Exception e) {
-            throw e;
-        }
+        JSONText = JSONTextBuilder.toString();
+
+        reader.close();
 
         return JSONText;
+    }
+
+    public MovementMediator getMovementMediator() {
+        return movementMediator;
     }
 }

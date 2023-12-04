@@ -3,7 +3,7 @@
     "ID": "TestNPC",
     "TYPE": "NPC",
     "INVENTORY": [],
-    "START_TILE": 2,
+    "START_TILE_ID": 2,
     "SHIP": "CARAVEL"
   }
 ]
