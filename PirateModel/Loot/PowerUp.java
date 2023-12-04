@@ -1,10 +1,14 @@
 package PirateModel.Loot;
 
-import PirateModel.Entities.Entity;
+public abstract class PowerUp extends UsableItem {
 
-public class PowerUp extends UsableItem {
+    // Additional fields specific to PowerUp, if any
+    // Example: private int powerLevel;
 
-    public void useItem(Entity entity) {
-        throw new UnsupportedOperationException("Not implemented!");
+    public PowerUp(String name, String description, int value) {
+        super(value);
     }
+
+    @Override
+    public abstract void useItem();
 }
