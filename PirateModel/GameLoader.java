@@ -13,7 +13,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class GameLoader {
 
@@ -34,8 +33,9 @@ public class GameLoader {
         movementMediator = new MovementMediator();
     }
 
-    public void loadGame() {
-
+    public PirateGame loadGame() {
+        // TODO: Add loadGame functionality - needs PirateGame implemented first
+        throw new UnsupportedOperationException("Not implemented!");
     }
 
 
