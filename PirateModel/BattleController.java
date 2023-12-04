@@ -19,7 +19,7 @@ public class BattleController {
     public BattleController(Player player, NPC[] enemies, int x, int y) {
         this.player = player;
         this.enemies = enemies;
-        this.gridMap = new Grid(x, y);
+        this.gridMap = new Grid(10, x, y);
     }
 
     /**
