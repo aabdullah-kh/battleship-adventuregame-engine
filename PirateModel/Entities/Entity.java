@@ -13,21 +13,17 @@ public abstract class Entity {
 
     private Ship ship;
 
-    private TileContainer currentTile;
-
     private MovementMediator mover;
 
-    public Entity(String ID, TileContainer currentTile, MovementMediator mover) {
+    public Entity(String ID, MovementMediator mover) {
         this.ID = ID;
-        this.currentTile = currentTile;
         this.mover = mover;
         inventory = new Inventory();
         //ship = new Caravel();
     }
 
-    public Entity(String ID, TileContainer currentTile, MovementMediator mover, Inventory inventory, Ship ship) {
+    public Entity(String ID, MovementMediator mover, Inventory inventory, Ship ship) {
         this.ID = ID;
-        this.currentTile = currentTile;
         this.mover = mover;
     }
 

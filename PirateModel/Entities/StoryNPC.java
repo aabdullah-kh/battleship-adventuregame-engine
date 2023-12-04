@@ -4,7 +4,7 @@ import PirateModel.MovementMediator;
 import PirateModel.TileContainer;
 
 public class StoryNPC extends NPC{
-    public StoryNPC(String ID, TileContainer currentTile, MovementMediator mover) {
-        super(ID, currentTile, mover);
+    public StoryNPC(String ID, MovementMediator mover) {
+        super(ID, mover);
     }
 }

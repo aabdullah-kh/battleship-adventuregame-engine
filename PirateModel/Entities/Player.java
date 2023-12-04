@@ -8,12 +8,12 @@ import PirateModel.TileContainer;
 public class Player extends Entity{
 
 
-    public Player(String ID, TileContainer currentTile, MovementMediator mover) {
-        super(ID, currentTile, mover);
+    public Player(String ID, MovementMediator mover) {
+        super(ID, mover);
     }
 
-    public Player(String ID, TileContainer currentTile, MovementMediator mover, Inventory inventory, Ship ship) {
-        super(ID, currentTile, mover, inventory, ship);
+    public Player(String ID, MovementMediator mover, Inventory inventory, Ship ship) {
+        super(ID, mover, inventory, ship);
     }
 
     @Override

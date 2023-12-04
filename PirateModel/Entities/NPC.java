@@ -14,8 +14,8 @@ public class NPC extends Entity{
     private ArrayList<Integer> lastHit;  // keeps track of the last successful hit's coordinate
     private int turns;  // the number of turns since the last successful hit
 
-    public NPC(String ID, TileContainer currentTile, MovementMediator mover) {
-        super(ID, currentTile, mover);
+    public NPC(String ID, MovementMediator mover) {
+        super(ID, mover);
     }
 
     public void nextMove() {
