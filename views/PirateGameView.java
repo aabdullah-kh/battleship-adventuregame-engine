@@ -50,6 +50,8 @@ public class PirateGameView {
     public HashMap<List<Integer>, StackPane> rectangleHashMap = new HashMap<>();
 
     int size;
+
+    public Label prompt;
     public PirateGameView(PirateGame game, Stage stage, int size) {
         this.game = game;
         this.stage = stage;
@@ -59,9 +61,9 @@ public class PirateGameView {
     public void initUI() {
         Ship ship = this.game.getPlayer().getShip();
 
-        String shipName = "GALLEON";
-        int health = 1;
-        int damage = 2;
+        String shipName = ship.getName();
+        int health = ship.getHealth();
+        int damage = ship.getDamage();
 
         stage.setTitle("Swashbuckler’s Gambit");
 
@@ -144,11 +146,11 @@ public class PirateGameView {
 
         shipStats.getChildren().addAll(shipStatsLabel, shipNameLabel, shipHealthLabel, shipDamageLabel);
 
-        Label label = new Label();
-        label.setText("What would you like to do?");
-        label.setFont(new Font("Arial", 20));
-        label.setTextFill(Color.WHITE);
-        label.setPadding(new Insets(10));
+        this.prompt = new Label();
+        this.prompt.setText("What would you like to do?");
+        this.prompt.setFont(new Font("Arial", 20));
+        this.prompt.setTextFill(Color.WHITE);
+        this.prompt.setPadding(new Insets(10));
 
         this.inputTextField = new TextField();
         this.inputTextField.setFont(new Font("Arial", 16));
@@ -158,7 +160,7 @@ public class PirateGameView {
         VBox textEntry = new VBox();
         textEntry.setStyle("-fx-background-color: #000000;");
         textEntry.setPadding(new Insets(20, 20, 20, 20));
-        textEntry.getChildren().addAll(label, this.inputTextField);
+        textEntry.getChildren().addAll(this.prompt, this.inputTextField);
         textEntry.setSpacing(10);
         textEntry.setAlignment(Pos.BOTTOM_CENTER);
 

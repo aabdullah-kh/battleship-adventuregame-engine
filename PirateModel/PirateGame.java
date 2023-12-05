@@ -48,6 +48,7 @@ public class PirateGame {
 
     public void handleEvent() {
         String eventText = player.getTileContainer().getTile().getEvent().getEventText() + "\nThe following actions are possible:\n";
+        this.pirateGameView.prompt.setText(eventText);
         EventAction[] actionList = player.getTileContainer().getTile().getEvent().getActionTable().parseActions(player);
 
         HashMap<String, EventAction> actionTextMap = new HashMap<>();
