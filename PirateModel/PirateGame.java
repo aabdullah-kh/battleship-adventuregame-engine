@@ -3,7 +3,9 @@ package PirateModel;
 import PirateModel.Entities.Entity;
 import PirateModel.Entities.Player;
 import PirateModel.Events.EventAction;
+import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -23,7 +25,7 @@ public class PirateGame {
         this.player = player;
     }
 
-    public void gameLoop() {
+    public void gameLoop() throws IOException, ParseException {
         while (true) {
             updateGridDisplay(map);
 
@@ -34,7 +36,7 @@ public class PirateGame {
         }
     }
 
-    public void handleEvent() {
+    public void handleEvent() throws IOException, ParseException {
         String eventText = player.getTileContainer().getTile().getEvent().getEventText() + "\nThe following actions are possible:\n";
         EventAction[] actionList = player.getTileContainer().getTile().getEvent().getActionTable().parseActions(player);
 
@@ -87,4 +89,15 @@ public class PirateGame {
         return map;
     }
 
+    public Entity getPlayer() {
+        return player;
+    }
+
+    public void gameOver() { //TODO
+
+    }
+
+    public MovementMediator getMovementMediator() {
+        return movementMediator;
+    }
 }

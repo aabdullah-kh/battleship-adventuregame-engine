@@ -28,11 +28,12 @@ public class Player extends Entity{
                 case "MOVE" -> {
                     command_valid = move(command[1]);
                 }
-                case "FIRE" -> {
-
+                case "SHOOT" -> {
+                    shoot(Integer.parseInt(command[1]), Integer.parseInt(command[2]));
+                    command_valid = true;
                 }
-                case "RETREAT" -> {
-
+                case "WAIT" -> {
+                    command_valid = true;
                 }
                 default -> {
 

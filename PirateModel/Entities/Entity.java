@@ -6,6 +6,8 @@ import PirateModel.Ships.Caravel;
 import PirateModel.Ships.Ship;
 import PirateModel.TileContainer;
 
+import java.util.ArrayList;
+
 public abstract class Entity {
 
     private String ID; //must be unique
@@ -62,13 +64,30 @@ public abstract class Entity {
      * Shoot the NPC at the x and y coordinate.
      * Return true if the NPC has been hit and false otherwise.
      *
-     * @param entity: The NPC
      * @param x:      The x-coordinate.
      * @param y:      The y-coordinate.
      * @return boolean depending on if there was a hit or not.
      */
-    public boolean shoot(Entity entity, int x, int y) {
-        Grid grid = entity.mover.getTileGrid().get(getTileContainer().getID());
-        grid.getTileContainer(x, y);
+    public boolean shoot(int x, int y) {
+        try {
+            Grid grid = this.mover.getTileGrid().get(getTileContainer().getID());
+            ArrayList<Entity> entityList = mover.getTileEntities().get(grid.getTileContainer(x, y).getID());
+            if (!entityList.isEmpty()) {
+                entityList.get(0).getShip().subtractHealth(ship.getDamage());
+                return true;
+            } else {
+                return false;
+            }
+        } catch (IndexOutOfBoundsException e){
+            return false;
+        }
+    }
+
+    public MovementMediator getMover() {
+        return mover;
+    }
+
+    public void setMover(MovementMediator mover) {
+        this.mover = mover;
     }
 }
