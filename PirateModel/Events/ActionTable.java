@@ -6,31 +6,29 @@ import java.util.ArrayList;
 
 public class ActionTable {
     // Attribute
-    private Action[] actions;
+    private EventAction[] actions;
 
     // Constructor (if needed)
-    public ActionTable(Action[] actions) {
+    public ActionTable(EventAction[] actions) {
         this.actions = actions;
     }
 
     /**
-     * Returns action if visible and executes them if forced
+     * Returns action if visible
      * @return applicable actions
      */
-    public Action[] parseActions(Entity entity) {
+    public EventAction[] parseActions(Entity entity) {
         
-        Action[] actionReturn = null;
+        EventAction[] actionReturn = null;
 
-        for(Action action: actions) {
-            ArrayList<Action> actionList = new ArrayList<>();
-            if (action.isForced()) {
-                action.execute(entity);
-            }
+        ArrayList<EventAction> actionList = new ArrayList<>();
+
+        for(EventAction action: actions) {
             if (!action.isHidden()) {
                 actionList.add(action);
             }
 
-            actionReturn = actionList.toArray(new Action[0]);
+            actionReturn = actionList.toArray(new EventAction[0]);
         }
         
         return actionReturn;

@@ -44,7 +44,9 @@ public abstract class Entity {
     }
 
     public boolean move(String dir) {
-        return (boolean) mover.receiveNotification(this, dir);
+        boolean moved = false;
+        while (!moved) moved = mover.receiveNotification(this, dir);
+        return true;
     }
 
     public abstract void nextMove();
