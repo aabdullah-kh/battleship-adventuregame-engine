@@ -81,6 +81,8 @@ public class PirateGame {
         System.out.println(gridD);
     }   // Temporary Implementation TODO Implement for FX
 
-
+    public Grid getMap() {
+        return map;
+    }
 
 }
