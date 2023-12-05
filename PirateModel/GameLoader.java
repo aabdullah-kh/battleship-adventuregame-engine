@@ -28,12 +28,9 @@ public class GameLoader {
 
     private Entity player;
 
-    private ArrayList<Event> events;
 
     public GameLoader(String gamePath) throws IOException, ParseException {
         this.gamePath = gamePath;
-
-        this.events = new ArrayList<>();
 
         String infoJSON = loadJSON(gamePath + "/info.json");
         JSONParser parser = new JSONParser();
@@ -41,6 +38,7 @@ public class GameLoader {
         this.gameInfo = (JSONObject) parser.parse(infoJSON);
 
         movementMediator = new MovementMediator();
+
     }
 
     public PirateGame loadGame() throws IOException, ParseException {
@@ -48,13 +46,8 @@ public class GameLoader {
         this.player = loadPlayer();
         loadEntities();
         PirateGame game = new PirateGame(mainGrid, movementMediator, player);
-        loadEvents(game);
 
-        for (String key: movementMediator.getEntityTiles().keySet()) {
-            if (!(key == "PLAYER")) {
-                movementMediator.getEntityTiles().get(key).getTile().setEvent(events.get(0));
-            }
-        }
+        loadEvents(game);
 
         return game;
     }
@@ -172,8 +165,9 @@ public class GameLoader {
             }
 
             Event newEvent = new Event((String) event.get("EVENT_TEXT"), new ActionTable(ea));
+            JSONArray newEventTiles = (JSONArray) event.get("TILES");
 
-            events.add(newEvent);
+            for (Object tileID: newEventTiles) movementMediator.getTileIDMap().get(((Long) tileID).intValue()).getTile().setEvent(newEvent);
         }
     }
 
