@@ -8,10 +8,10 @@ public class TextToSpeechTest {
      */
 
     @Test
-    public void TextToSpeechTestVoice() {
+    public void textToSpeechTestVoice() {
         TextToSpeech tts = new TextToSpeech();
 
-        tts.Speak("I love C S C 2 3 6 hahahahaha yeah");
+        tts.speak("I love C S C 2 3 6 hahahahaha yeah");
 
     }
 
