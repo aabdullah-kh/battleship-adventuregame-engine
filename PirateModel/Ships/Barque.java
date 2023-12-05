@@ -3,6 +3,7 @@ package PirateModel.Ships;
 public class Barque extends Ship {
 
     public Barque() {
-        super("BARQUE", 180, 110);
+        // Spawn location may change (xCoord, yCoord)
+        super(0,0,"BARQUE", 180, 37);
     }
 }
