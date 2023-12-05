@@ -76,7 +76,8 @@ public class PirateGame {
         String gridD = "";
         for(int i = 0; i < grid.getSizeY(); i++) {
             for(int j = 0; j < grid.getSizeX(); j++) {
-                gridD = gridD.concat(Character.toString(grid.getTileContainer(j, i).getTile().getSymbol()));
+                //gridD = gridD.concat(Character.toString(grid.getTileContainer(j, i).getTile().getSymbol()));
+                gridD = gridD.concat("(" + grid.getTileContainer(j, i).getXPos() + ", " + grid.getTileContainer(j, i).getYPos() + ")");
             }
             gridD = gridD.concat("\n");
         }
@@ -95,5 +96,9 @@ public class PirateGame {
 
     public void gameOver() { //TODO
 
+    }
+
+    public MovementMediator getMovementMediator() {
+        return movementMediator;
     }
 }
