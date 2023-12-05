@@ -15,13 +15,13 @@ import java.util.ArrayList;
 
 public class GameLoader {
 
-    String gamePath;
+    private String gamePath;
 
-    JSONObject gameInfo;
+    private JSONObject gameInfo;
 
-    MovementMediator movementMediator;
+    private MovementMediator movementMediator;
 
-    Entity player;
+    private Entity player;
 
     public GameLoader(String gamePath) throws IOException, ParseException {
         this.gamePath = gamePath;

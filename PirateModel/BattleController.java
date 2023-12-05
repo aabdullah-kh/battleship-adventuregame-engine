@@ -2,6 +2,10 @@ package PirateModel;
 
 import PirateModel.Entities.NPC;
 import PirateModel.Entities.Player;
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Class Battlecontroller
@@ -14,12 +18,26 @@ public class BattleController {
 
     private Player player;
 
-    private NPC[] enemies;
+    private ArrayList<NPC> enemies;
 
-    public BattleController(Player player, NPC[] enemies, int x, int y) {
+    private PirateGame gameController;
+
+    public BattleController(PirateGame gameController, Player player, ArrayList<NPC> enemies, int x, int y) throws IOException, ParseException {
         this.player = player;
         this.enemies = enemies;
-        this.gridMap = new Grid(10, x, y);
+        GameLoader gl = new GameLoader("ExampleGrid");
+        this.gridMap = gl.loadGrid("BattleGrid");
+
+        gl.getMovementMediator().getTileEntities().get(1).add(player);
+        gl.getMovementMediator().getEntityTiles().put(player.getID(), gl.getMovementMediator().getTileIDMap().get(1));
+
+        for (NPC enemy: enemies) {
+            gl.getMovementMediator().getTileEntities().get(2).add(enemy);
+            gl.getMovementMediator().getEntityTiles().put(enemy.getID(), gl.getMovementMediator().getTileIDMap().get(2));
+        }
+
+        this.gameController = gameController;
+
     }
 
     /**
@@ -29,23 +47,22 @@ public class BattleController {
      */
     public boolean battle() {
 
-        // do something with the grid map
+        while (!enemies.isEmpty()) {
+            gameController.updateGridDisplay(gridMap);
 
-
-        // loop runs until either the Player or NPC dies
-        while (true) {
             player.nextMove();
-            enemies[0].nextMove();
 
-            if (enemies[0].getShip().getHealth() <= 0) {
-                return true;
+            for(NPC enemy: enemies) {
+                if (enemy.getShip().getHealth() <= 0) enemies.remove(enemy);
+                else enemy.nextMove();
             }
 
-            else if (player.getShip().getHealth() <= 0) {
-                return false;
-            }
+            if (player.getShip().getHealth() <= 0) return false;
 
         }
+
+        return true;
+
     }
 
 }
