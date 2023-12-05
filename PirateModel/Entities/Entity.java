@@ -82,4 +82,8 @@ public abstract class Entity {
         }
 
     }
+
+    public MovementMediator getMover() {
+        return mover;
+    }
 }
