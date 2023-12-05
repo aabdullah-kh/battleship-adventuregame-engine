@@ -6,6 +6,8 @@ import PirateModel.Ships.Caravel;
 import PirateModel.Ships.Ship;
 import PirateModel.TileContainer;
 
+import java.util.ArrayList;
+
 public abstract class Entity {
 
     private String ID; //must be unique
@@ -69,6 +71,15 @@ public abstract class Entity {
      */
     public boolean shoot(Entity entity, int x, int y) {
         Grid grid = entity.mover.getTileGrid().get(getTileContainer().getID());
-        grid.getTileContainer(x, y);
+        ArrayList<Entity> entityList = mover.getTileEntities().get(grid.getTileContainer(x, y).getID());
+
+        if (!entityList.isEmpty()) {
+            entityList.get(0).getShip().subtractHealth(ship.getDamage());
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
 }
