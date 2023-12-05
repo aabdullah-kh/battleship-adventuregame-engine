@@ -20,9 +20,16 @@ public class MovementMediator {
 
     private HashMap<Integer, Grid> tileGrid; //TileContainer.ID, Grid
 
+    private HashMap<Integer, TileContainer> tileIDMap;
+
     //temp constructor for testing purposes ONLY
 
-    public MovementMediator(){}
+    public MovementMediator() {
+        entityTiles = new HashMap<>();
+        tileEntities = new HashMap<>();
+        tileGrid = new HashMap<>();
+        tileIDMap = new HashMap<>();
+    }
 
     public boolean receiveNotification(Entity entity, String dir) {
         TileContainer origin = entityTiles.get(entity.getID());
@@ -45,14 +52,14 @@ public class MovementMediator {
 
         try {
             switch (dir) {
-                case "N" -> targetTile = grid.getTileContainer(tile.getXPos(), tile.getYPos() + 1);
-                case "NW" -> targetTile = grid.getTileContainer(tile.getXPos() + 1, tile.getYPos() + 1);
+                case "N" -> targetTile = grid.getTileContainer(tile.getXPos(), tile.getYPos() - 1);
+                case "NW" -> targetTile = grid.getTileContainer(tile.getXPos() + 1, tile.getYPos() - 1);
                 case "W" -> targetTile = grid.getTileContainer(tile.getXPos() + 1, tile.getYPos());
-                case "SW" -> targetTile = grid.getTileContainer(tile.getXPos() + 1, tile.getYPos() - 1);
-                case "S" -> targetTile = grid.getTileContainer(tile.getXPos(), tile.getYPos() - 1);
-                case "SE" -> targetTile = grid.getTileContainer(tile.getXPos() - 1, tile.getYPos() - 1);
+                case "SW" -> targetTile = grid.getTileContainer(tile.getXPos() + 1, tile.getYPos() + 1);
+                case "S" -> targetTile = grid.getTileContainer(tile.getXPos(), tile.getYPos() + 1);
+                case "SE" -> targetTile = grid.getTileContainer(tile.getXPos() - 1, tile.getYPos() + 1);
                 case "E" -> targetTile = grid.getTileContainer(tile.getXPos() - 1, tile.getYPos());
-                case "NE" -> targetTile = grid.getTileContainer(tile.getXPos() - 1, tile.getYPos() + 1);
+                case "NE" -> targetTile = grid.getTileContainer(tile.getXPos() - 1, tile.getYPos() - 1);
                 default -> {
                     return null;
                 }
@@ -67,4 +74,17 @@ public class MovementMediator {
         return entityTiles.get(entity.getID());
     }
 
+    public HashMap<Integer, ArrayList<Entity>> getTileEntities() {
+        return tileEntities;
+    }
+
+    public HashMap<Integer, Grid> getTileGrid() {
+        return tileGrid;
+    }
+
+    public HashMap<String, TileContainer> getEntityTiles() {
+        return entityTiles;
+    }
+
+    public HashMap<Integer, TileContainer> getTileIDMap() { return tileIDMap; }
 }

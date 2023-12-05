@@ -1,0 +1,9 @@
+[
+  {
+    "ID": "TestNPC",
+    "TYPE": "NPC",
+    "INVENTORY": [],
+    "START_TILE_ID": 2,
+    "SHIP": "CARAVEL"
+  }
+]

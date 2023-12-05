@@ -23,8 +23,9 @@ public class TileContainer {
      * @param x x-pos of this tileContainer on its Grid
      * @param y y-pos of this tileContainer on its Grid
      */
-    public TileContainer (Tile tile, int x, int y) {
+    public TileContainer (Tile tile, int ID, int x, int y) {
         this.tile = tile;
+        this.ID = ID;
         xPos = x;
         yPos = y;
     }

@@ -50,4 +50,12 @@ public class Grid {
         return this.ID;
     }
 
+    public int getSizeX() {
+        return grid.length;
+    }
+
+    public int getSizeY() {
+        return grid[0].length;
+    }
+
 }

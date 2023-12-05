@@ -13,24 +13,18 @@ public abstract class Entity {
 
     private Ship ship;
 
-    private TileContainer currentTile;
-
     private MovementMediator mover;
 
-    public Entity(String ID, TileContainer currentTile, MovementMediator mover) {
+    public Entity(String ID, MovementMediator mover) {
         this.ID = ID;
-        this.currentTile = currentTile;
         this.mover = mover;
-        this.inventory = new Inventory();
+        inventory = new Inventory();
         //ship = new Caravel();
     }
 
-    public Entity(String ID, TileContainer currentTile, MovementMediator mover, Inventory inventory, Ship ship) {
+    public Entity(String ID, MovementMediator mover, Inventory inventory, Ship ship) {
         this.ID = ID;
-        this.currentTile = currentTile;
         this.mover = mover;
-        this.inventory = inventory;
-        this.ship = ship;
     }
 
     public String getID() {
@@ -46,15 +40,16 @@ public abstract class Entity {
     }
 
     public boolean changeShip(Ship ship) {
-        this.ship = ship;
-        return true;
+        throw new UnsupportedOperationException("Not implemented!");
     }
 
     public boolean move(String dir) {
-        return (boolean) mover.receiveNotification(this, dir);
+        return mover.receiveNotification(this, dir);
     }
 
     public abstract void nextMove();
 
-    public TileContainer getCurrentTile() { return this.currentTile;}
+    public TileContainer getTileContainer() {
+        return mover.getEntityTiles().get(ID);
+    }
 }

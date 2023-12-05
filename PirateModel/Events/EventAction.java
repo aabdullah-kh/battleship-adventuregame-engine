@@ -2,14 +2,14 @@ package PirateModel.Events;
 
 import PirateModel.Entities.Entity;
 
-public abstract class Action {
+public abstract class EventAction {
     // Attributes
     private String label;
     private boolean forcedAction;
     private boolean hidden;
 
     // Constructor (optional, depending on your needs)
-    public Action(String label, boolean forcedAction, boolean hidden) {
+    public EventAction(String label, boolean forcedAction, boolean hidden) {
         this.label = label;
         this.forcedAction = forcedAction;
         this.hidden = hidden;
