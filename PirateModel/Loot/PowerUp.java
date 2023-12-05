@@ -1,10 +1,14 @@
 package PirateModel.Loot;
 
-import PirateModel.Entities.Entity;
+import PirateModel.Ships.Ship;
 
-public class PowerUp extends UsableItem {
+public abstract class PowerUp {
 
-    public void useItem(Entity entity) {
-        throw new UnsupportedOperationException("Not implemented!");
+    public PowerUp() {
+        // Constructor logic if needed
     }
+
+    // Abstract method to apply the power-up effect on a ship
+    public abstract void applyEffect(Ship ship);
 }
+

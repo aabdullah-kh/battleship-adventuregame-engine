@@ -1,11 +1,9 @@
 package PirateModel.Loot;
 
-public class Loot {
+public abstract class Loot {
 
     private String name;
-
     private String description;
-
     private int value;
 
     public String getName() {
@@ -19,4 +17,5 @@ public class Loot {
     public int getValue() {
         return this.value;
     }
+
 }
