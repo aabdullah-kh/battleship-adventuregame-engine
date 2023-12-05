@@ -2,6 +2,7 @@ package views;
 
 import PirateModel.Entities.Entity;
 import PirateModel.Entities.Player;
+import PirateModel.Grid;
 import PirateModel.PirateGame;
 import PirateModel.Ships.Ship;
 import javafx.animation.PauseTransition;
@@ -19,20 +20,40 @@ import javafx.scene.layout.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.scene.AccessibleRole;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class PirateGameView {
 
     PirateGame game;
 
     Stage stage;
-    public PirateGameView(PirateGame game, Stage stage) {
+
+    TextField inputTextField;
+
+    static GridPane gridPane;
+
+    GridPane displayGrid;
+
+    static VBox vBox;
+
+    String input;
+
+    public HashMap<List<Integer>, StackPane> rectangleHashMap = new HashMap<>();
+
+    int size;
+    public PirateGameView(PirateGame game, Stage stage, int size) {
         this.game = game;
         this.stage = stage;
+        this.size = size;
         initUI();
     }
     public void initUI() {
@@ -44,18 +65,31 @@ public class PirateGameView {
 
         stage.setTitle("Swashbuckler’s Gambit");
 
-        GridPane gridPane = new GridPane();
+        vBox = new VBox();
+        vBox.setBackground(new Background(new BackgroundFill(Color.BLACK, new CornerRadii(0), new Insets(0))));
 
-        GridPane displayGrid = new GridPane(10, 10);
-        displayGrid.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0), new Insets(0))));
-        displayGrid.setAlignment(Pos.CENTER);
 
-        for (int row = 0; row < 10; row++) {
-            for (int col = 0; col < 10; col++) {
+
+        gridPane = new GridPane();
+        gridPane.setPrefWidth(1000);
+
+        this.displayGrid = new GridPane(size, size);
+        this.displayGrid.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0), new Insets(0))));
+        this.displayGrid.setAlignment(Pos.CENTER);
+
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++) {
                 Rectangle rectangle = new Rectangle(40, 40);
                 rectangle.setFill(Color.TRANSPARENT);
                 rectangle.setStroke(Color.BLACK);
-                displayGrid.add(rectangle, col, row);
+                Text text = new Text("a");
+                StackPane stack = new StackPane();
+                stack.getChildren().addAll(rectangle, text);
+                displayGrid.add(stack, col, row);
+                List<Integer> coordinate = new ArrayList<>();
+                coordinate.add(row);
+                coordinate.add(col);
+                rectangleHashMap.put(coordinate, stack);
             }
         }
 
@@ -68,6 +102,7 @@ public class PirateGameView {
 
         ColumnConstraints column1 = new ColumnConstraints(150);
         ColumnConstraints column2 = new ColumnConstraints(650);
+        ColumnConstraints column3 = new ColumnConstraints(160);
 
         RowConstraints row1 = new RowConstraints();
         RowConstraints row2 = new RowConstraints( 550 );
@@ -76,7 +111,7 @@ public class PirateGameView {
         row1.setVgrow(Priority.SOMETIMES);
         row3.setVgrow(Priority.SOMETIMES);
 
-        gridPane.getColumnConstraints().addAll(column1, column2, column1);
+        gridPane.getColumnConstraints().addAll(column1, column2, column3);
         gridPane.getRowConstraints().addAll(row1, row2, row1);
 
         VBox shipStats = new VBox();
@@ -115,14 +150,15 @@ public class PirateGameView {
         label.setTextFill(Color.WHITE);
         label.setPadding(new Insets(10));
 
-        TextField inputTextField = new TextField();
-        inputTextField.setFont(new Font("Arial", 16));
-        inputTextField.setFocusTraversable(true);
+        this.inputTextField = new TextField();
+        this.inputTextField.setFont(new Font("Arial", 16));
+        this.inputTextField.setFocusTraversable(true);
+        textHandlingEvent();
 
         VBox textEntry = new VBox();
         textEntry.setStyle("-fx-background-color: #000000;");
         textEntry.setPadding(new Insets(20, 20, 20, 20));
-        textEntry.getChildren().addAll(label, inputTextField);
+        textEntry.getChildren().addAll(label, this.inputTextField);
         textEntry.setSpacing(10);
         textEntry.setAlignment(Pos.BOTTOM_CENTER);
 
@@ -134,9 +170,32 @@ public class PirateGameView {
         gridPane.add(centerPane, 1,1,3,1);
         gridPane.add(textEntry,0,2,3,1);
 
-        Scene scene = new Scene(gridPane, 1000, 800);
+        vBox.getChildren().add(gridPane);
+
+        Scene scene = new Scene(vBox, 1000, 850);
         scene.setFill(Color.BLACK);
         stage.setScene(scene);
         stage.show();
     }
+
+    public void textHandlingEvent() {
+        this.inputTextField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                input = this.inputTextField.getText().strip();
+                PirateGame.getInput(input);
+                this.inputTextField.clear();
+            }
+        });
+    }
+
+    public static void displayTextFX(String text) {
+        Label textLabel = new Label();
+        textLabel.setText(text);
+        textLabel.setTextFill(Color.WHITE);
+        textLabel.setFont(new Font("Arial", 18));
+        textLabel.setPadding(new Insets(20));
+
+        vBox.getChildren().add(textLabel);
+    }
+
 }

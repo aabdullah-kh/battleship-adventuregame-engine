@@ -3,8 +3,13 @@ package PirateModel;
 import PirateModel.Entities.Entity;
 import PirateModel.Entities.Player;
 import PirateModel.Events.EventAction;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+import views.PirateGameView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class PirateGame {
@@ -17,22 +22,29 @@ public class PirateGame {
 
     private MovementMediator movementMediator;
 
+    public static String input;
+
+    public PirateGameView pirateGameView;
+
     public PirateGame(Grid map, MovementMediator movementMediator, Entity player) {
         this.map = map;
         this.movementMediator = movementMediator;
         this.player = player;
     }
 
-    public void gameLoop() {
-        while (true) {
-            updateGridDisplay(map);
+    public void gameLoop(PirateGameView pirateGameView) {
+        this.pirateGameView =  pirateGameView;
+        updateGridDisplay(map);
+//        while (true) {
+//            updateGridDisplay(map);
 
-            player.nextMove();
+        // player.nextMove();
 
-            //event control
-            if (player.getTileContainer().getTile().getEvent() != null) handleEvent();
-        }
+        //event control
+        if (player.getTileContainer().getTile().getEvent() != null) handleEvent();
     }
+
+
 
     public void handleEvent() {
         String eventText = player.getTileContainer().getTile().getEvent().getEventText() + "\nThe following actions are possible:\n";
@@ -48,8 +60,9 @@ public class PirateGame {
 
         EventAction action = null;
         while (action == null) {
-            String actionInput = getInput();
+            String actionInput = PirateGame.input;
             action = actionTextMap.getOrDefault(actionInput, null);
+            PirateGame.input = null;
         }
         action.execute(player);
 
@@ -63,32 +76,34 @@ public class PirateGame {
      * Handles input.
      * @return inputted string.
      */
-    public static String getInput() {
+    public static void getInput(String input) {
         //Uses scanner as temporary input reader until FX is implemented
-        System.out.println("Please input: ");
-        Scanner input = new Scanner(System.in);
-        return input.nextLine().toUpperCase();
+        PirateGame.input = input;
     }   // Temporary Implementation TODO Implement for FX
 
     public void displayText(String text) {
-        System.out.println(text);
+        PirateGameView.displayTextFX(text);
     }   // Temporary Implementation TODO Implement for FX
 
     public void updateGridDisplay(Grid grid) {
-        String gridD = "";
-        for(int i = 0; i < grid.getSizeY(); i++) {
-            for(int j = 0; j < grid.getSizeX(); j++) {
-                gridD = gridD.concat(Character.toString(grid.getTileContainer(j, i).getTile().getSymbol()));
+        //String gridD = "";
+        for (int i = 0; i < grid.getSizeY(); i++) {
+            for (int j = 0; j < grid.getSizeX(); j++) {
+                //gridD = gridD.concat(Character.toString(grid.getTileContainer(j, i).getTile().getSymbol()));
+                List<Integer> coordinate = new ArrayList<>();
+                coordinate.add(i);
+                coordinate.add(j);
+                StackPane tile = this.pirateGameView.rectangleHashMap.get(coordinate);
+                Text text = new Text(Character.toString(grid.getTileContainer(j, i).getTile().getSymbol()));
+                tile.getChildren().remove(1);
+                tile.getChildren().add(text);
             }
-            gridD = gridD.concat("\n");
+            //gridD = gridD.concat("\n");
         }
 
-        System.out.println(gridD);
-        System.out.println("Player Location is: " + player.getTileContainer().getXPos() + ", " + player.getTileContainer().getYPos());
-    }   // Temporary Implementation TODO Implement for FX
-
-    public Grid getMap() {
-        return map;
     }
 
+    public Grid getMap() {
+        return this.map;
+    }
 }

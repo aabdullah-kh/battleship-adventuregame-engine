@@ -20,7 +20,7 @@ public class Player extends Entity{
     public void nextMove() {
         boolean command_valid = false;
         while (!command_valid) {
-            String move = PirateGame.getInput();
+            String move = PirateGame.input;
 
             String[] command = move.split(" ");
 

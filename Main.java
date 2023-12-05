@@ -12,15 +12,14 @@ public class Main extends Application {
     PirateGame game;
     PirateGameView pirateGameView;
     public static void main(String[] args) throws Exception {
-
         launch(args);
     }
 
     public void start(Stage stage) throws IOException, ParseException {
         GameLoader gl = new GameLoader("ExampleGame");
         game = gl.loadGame();
-        this.pirateGameView = new PirateGameView(game, stage);
-//        game.gameLoop();
+        this.pirateGameView = new PirateGameView(game, stage, game.getMap().getSizeX());
+        game.gameLoop(this.pirateGameView);
     }
 
 }
