@@ -16,6 +16,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
@@ -45,6 +46,19 @@ public class PirateGameView extends Application{
 
         GridPane gridPane = new GridPane();
 
+        GridPane displayGrid = new GridPane(10, 10);
+        displayGrid.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0), new Insets(0))));
+        displayGrid.setAlignment(Pos.CENTER);
+
+        for (int row = 0; row < 10; row++) {
+            for (int col = 0; col < 10; col++) {
+                Rectangle rectangle = new Rectangle(40, 40);
+                rectangle.setFill(Color.TRANSPARENT);
+                rectangle.setStroke(Color.BLACK);
+                displayGrid.add(rectangle, col, row);
+            }
+        }
+
         gridPane.setPadding(new Insets(20));
         gridPane.setBackground(new Background(new BackgroundFill(
                 Color.valueOf("#000000"),
@@ -54,8 +68,6 @@ public class PirateGameView extends Application{
 
         ColumnConstraints column1 = new ColumnConstraints(150);
         ColumnConstraints column2 = new ColumnConstraints(650);
-        ColumnConstraints column3 = new ColumnConstraints(150);
-
 
         RowConstraints row1 = new RowConstraints();
         RowConstraints row2 = new RowConstraints( 550 );
@@ -77,8 +89,25 @@ public class PirateGameView extends Application{
 
         Label shipStatsLabel = new Label();
         shipStatsLabel.setText("Ship Stats:");
-        shipStatsLabel.setFont(new Font("Arial", 20));
+        shipStatsLabel.setFont(new Font("Poppins", 25));
         shipStatsLabel.setTextFill(Color.BLACK);
+
+        Label shipNameLabel = new Label();
+        shipNameLabel.setText("Ship: " + shipName);
+        shipNameLabel.setFont(new Font("Poppins", 18));
+        shipNameLabel.setTextFill(Color.BLACK);
+
+        Label shipHealthLabel = new Label();
+        shipHealthLabel.setText("Health: " + health);
+        shipHealthLabel.setFont(new Font("Poppins", 18));
+        shipHealthLabel.setTextFill(Color.BLACK);
+
+        Label shipDamageLabel = new Label();
+        shipDamageLabel.setText("Damage: " + damage);
+        shipDamageLabel.setFont(new Font("Poppins", 18));
+        shipDamageLabel.setTextFill(Color.BLACK);
+
+        shipStats.getChildren().addAll(shipStatsLabel, shipNameLabel, shipHealthLabel, shipDamageLabel);
 
         Label label = new Label();
         label.setText("What would you like to do?");
@@ -97,14 +126,17 @@ public class PirateGameView extends Application{
         textEntry.setSpacing(10);
         textEntry.setAlignment(Pos.BOTTOM_CENTER);
 
-        gridPane.add(textEntry, 0, 2, 3, 1);
-        gridPane.getChildren().add(shipStats);
-        gridPane.setAlignment(Pos.BOTTOM_CENTER);
+        StackPane centerPane = new StackPane();
+        centerPane.getChildren().add(displayGrid);
+        centerPane.setAlignment(Pos.CENTER);
+
+        gridPane.add(shipStats, 0, 1, 1, 1);
+        gridPane.add(centerPane, 1,1,3,1);
+        gridPane.add(textEntry,0,2,3,1);
 
         Scene scene = new Scene(gridPane, 1000, 800);
         scene.setFill(Color.BLACK);
         stage.setScene(scene);
-
         stage.show();
     }
 }
