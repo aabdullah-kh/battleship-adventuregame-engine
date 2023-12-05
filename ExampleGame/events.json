@@ -1,0 +1,9 @@
+[
+  {
+    "EVENT_TEXT": "You spot an enemy ship over the horizon!",
+    "EVENT_ACTIONS": [
+      "BATTLE"
+    ]
+
+  }
+]

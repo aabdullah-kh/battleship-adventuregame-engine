@@ -1,6 +1,10 @@
 package PirateModel;
 
 import PirateModel.Entities.*;
+import PirateModel.Events.ActionTable;
+import PirateModel.Events.Battle;
+import PirateModel.Events.Event;
+import PirateModel.Events.EventAction;
 import PirateModel.Ships.*;
 import PirateModel.Tiles.*;
 import org.json.simple.JSONArray;
@@ -8,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,8 +28,12 @@ public class GameLoader {
 
     private Entity player;
 
+    private ArrayList<Event> events;
+
     public GameLoader(String gamePath) throws IOException, ParseException {
         this.gamePath = gamePath;
+
+        this.events = new ArrayList<>();
 
         String infoJSON = loadJSON(gamePath + "/info.json");
         JSONParser parser = new JSONParser();
@@ -39,6 +48,13 @@ public class GameLoader {
         this.player = loadPlayer();
         loadEntities();
         PirateGame game = new PirateGame(mainGrid, movementMediator, player);
+        loadEvents(game);
+
+        for (String key: movementMediator.getEntityTiles().keySet()) {
+            if (!(key == "PLAYER")) {
+                movementMediator.getEntityTiles().get(key).getTile().setEvent(events.get(0));
+            }
+        }
 
         return game;
     }
@@ -136,6 +152,31 @@ public class GameLoader {
 
         }
     }
+
+    private void loadEvents(PirateGame pirateGame) throws IOException, ParseException {
+        String eventsJSON = loadJSON(gamePath + "/events.json");
+        String actionsJSON = loadJSON(gamePath + "/eventActions.json");
+        JSONParser parser = new JSONParser();
+        JSONArray eventsArr = (JSONArray) parser.parse(eventsJSON);
+        JSONObject actionsObj = (JSONObject) parser.parse(actionsJSON);
+
+        for (Object eventJSON: eventsArr) {
+            JSONObject event = (JSONObject) eventJSON;
+            EventAction[] ea = new EventAction[((JSONArray) event.get("EVENT_ACTIONS")).size()];
+            for (int i = 0; i < ((JSONArray) event.get("EVENT_ACTIONS")).size(); i++) {
+                String actionType = (String) ((JSONArray) event.get("EVENT_ACTIONS")).get(i);
+                switch (actionType) {
+                    case "BATTLE" -> ea[i] = new Battle("FIGHT", false, false, pirateGame);
+                }
+
+            }
+
+            Event newEvent = new Event((String) event.get("EVENT_TEXT"), new ActionTable(ea));
+
+            events.add(newEvent);
+        }
+    }
+
     private TileContainer generateTileContainer(JSONObject object, int x, int y, int defaultID) {
         Tile newTile;
 

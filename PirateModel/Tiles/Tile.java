@@ -32,4 +32,6 @@ public abstract class Tile {
     public char getSymbol() { return SYMBOL; }
 
     public Event getEvent() { return event; }
+
+    public void setEvent(Event event) { this.event = event; }
 }
