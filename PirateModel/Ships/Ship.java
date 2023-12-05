@@ -5,17 +5,6 @@ import PirateModel.Entities.Entity;
 public class Ship {
 
     /**
-     * The x-coordinate of the ship.
-     */
-
-    private int xCoord;
-
-    /**
-     * The y-coordinate of the ship.
-     */
-    private int yCoord;
-
-    /**
      * The name of the Ship.
      */
     private final String name;
@@ -40,9 +29,7 @@ public class Ship {
      * @param health: the Ship's health.
      * @param damage: the Ship's damage.
      */
-    public Ship(int xCoord, int yCoord, String name, int health, int damage) {
-        this.xCoord = xCoord;
-        this.yCoord = yCoord;
+    public Ship(String name, int health, int damage) {
         this.name = name;
         this.health = health;
         this.damage = damage;
@@ -93,35 +80,4 @@ public class Ship {
         return this.damage;
     }
 
-    /**
-     * Return the Ship's current x-coordinate.
-     * @return int representation of the Ship's x-coordinate.
-     */
-    public int getXCoord() {
-        return this.xCoord;
-    }
-
-    /**
-     * Return the Ship's current y-coordinate.
-     * @return int representation of the Ship's y-coordinate.
-     */
-    public int getYCoord() {
-        return this.yCoord;
-    }
-
-    /**
-     * Shoot the NPC at the x and y coordinate.
-     * Return true if the NPC has been hit and false otherwise.
-     *
-     * @param entity: The NPC
-     * @param x:      The x-coordinate.
-     * @param y:      The y-coordinate.
-     * @return boolean depending on if there was a hit or not.
-     */
-     public boolean shoot(Entity entity, int x, int y) {
-         Ship NPCShip = entity.getShip();
-
-         return (NPCShip.getXCoord() == x && NPCShip.getYCoord() == y);
-     }
-    
 }

@@ -1,5 +1,6 @@
 package PirateModel.Entities;
 
+import PirateModel.Grid;
 import PirateModel.MovementMediator;
 import PirateModel.Ships.Caravel;
 import PirateModel.Ships.Ship;
@@ -55,5 +56,19 @@ public abstract class Entity {
 
     public TileContainer getTileContainer() {
         return mover.getEntityTiles().get(ID);
+    }
+
+    /**
+     * Shoot the NPC at the x and y coordinate.
+     * Return true if the NPC has been hit and false otherwise.
+     *
+     * @param entity: The NPC
+     * @param x:      The x-coordinate.
+     * @param y:      The y-coordinate.
+     * @return boolean depending on if there was a hit or not.
+     */
+    public boolean shoot(Entity entity, int x, int y) {
+        Grid grid = entity.mover.getTileGrid().get(getTileContainer().getID());
+        grid.getTileContainer(x, y);
     }
 }
