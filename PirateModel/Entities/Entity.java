@@ -21,7 +21,7 @@ public abstract class Entity {
         this.ID = ID;
         this.currentTile = currentTile;
         this.mover = mover;
-        inventory = new Inventory();
+        this.inventory = new Inventory();
         //ship = new Caravel();
     }
 
@@ -29,6 +29,8 @@ public abstract class Entity {
         this.ID = ID;
         this.currentTile = currentTile;
         this.mover = mover;
+        this.inventory = inventory;
+        this.ship = ship;
     }
 
     public String getID() {
@@ -52,7 +54,7 @@ public abstract class Entity {
         return (boolean) mover.receiveNotification(this, dir);
     }
 
-    public abstract void nextMove(Entity entity);
+    public abstract void nextMove();
 
     public TileContainer getCurrentTile() { return this.currentTile;}
 }

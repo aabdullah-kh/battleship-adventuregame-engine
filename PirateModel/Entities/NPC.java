@@ -1,5 +1,7 @@
 package PirateModel.Entities;
 
+import PirateModel.MovementMediator;
+import PirateModel.Ships.Ship;
 import PirateModel.TileContainer;
 import PirateModel.Tiles.Tile;
 
@@ -18,8 +20,14 @@ public class NPC extends Entity{
     private int turns;  // the number of turns since the last successful hit
     private String[] moves = {"N", "S", "E", "W",
                             "NE", "NW", "SE", "SW"}; // the possible moves that an NPC can make
+    private Entity player;
 
-    public void nextMove(Entity player) {
+    public NPC(String ID, TileContainer currentTile, MovementMediator mover, Ship ship, Entity player) {
+        super(ID, currentTile, mover, new Inventory(), ship);
+        this.player = player;
+    }
+
+    public void nextMove() {
         /*
         Determines and makes a move for the NPC in combat.
          */
@@ -44,12 +52,8 @@ public class NPC extends Entity{
             // get player tile xy pos
             TileContainer playerTile = player.getCurrentTile();
 
-//            int x = playerTile.getXPos();
-//            int y = playerTile.getYPos();
-
-            // PLACEHOLDERS
-            int x = player.getShip().getXCoord();
-            int y = player.getShip().getYCoord();
+            int x = playerTile.getXPos();
+            int y = playerTile.getYPos();
 
             // NPC shoots relative to where the Player currently is (since Player and NPC can see each other)
 

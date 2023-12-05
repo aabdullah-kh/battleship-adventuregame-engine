@@ -11,12 +11,12 @@ public class TestNPC {
 
     @Test
     public void nextMoveBasicTest() {
-        Galleon ship = new Galleon("G", 1, 1);
-        Player player = new Player();
-        player.changeShip(ship);
-        NPC npc = new NPC();
-        npc.changeShip(ship);
-        // npc.nextMove(player); need to merge
+//        Galleon ship = new Galleon("G", 1, 1);
+//        Player player = new Player();
+//        player.changeShip(ship);
+//        NPC npc = new NPC(player);
+//        npc.changeShip(ship);
+//        npc.nextMove(player); need to merge
 
     }
 
