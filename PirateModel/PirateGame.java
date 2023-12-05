@@ -17,20 +17,20 @@ public class PirateGame {
 
     private MovementMediator movementMediator;
 
-    public PirateGame(Grid map, MovementMediator movementMediator) {
+    public PirateGame(Grid map, MovementMediator movementMediator, Entity player) {
         this.map = map;
         this.movementMediator = movementMediator;
-        this.player = new Player("PLAYER", movementMediator);
+        this.player = player;
     }
 
     public void gameLoop() {
         while (true) {
+            updateGridDisplay(map);
+
             player.nextMove();
 
             //event control
             if (player.getTileContainer().getTile().getEvent() != null) handleEvent();
-
-            updateGridDisplay(map);
         }
     }
 
@@ -61,8 +61,9 @@ public class PirateGame {
      */
     public static String getInput() {
         //Uses scanner as temporary input reader until FX is implemented
+        System.out.println("Please input: ");
         Scanner input = new Scanner(System.in);
-        return input.nextLine();
+        return input.nextLine().toUpperCase();
     }   // Temporary Implementation TODO Implement for FX
 
     public void displayText(String text) {
@@ -79,6 +80,7 @@ public class PirateGame {
         }
 
         System.out.println(gridD);
+        System.out.println("Player Location is: " + player.getTileContainer().getXPos() + ", " + player.getTileContainer().getYPos());
     }   // Temporary Implementation TODO Implement for FX
 
     public Grid getMap() {

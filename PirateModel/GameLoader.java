@@ -81,7 +81,7 @@ public class GameLoader {
         JSONParser parser = new JSONParser();
         JSONObject entityData = (JSONObject) parser.parse(entityJSON);
 
-        Entity player = new Player("Player", movementMediator);
+        Entity player = new Player((String) entityData.get("ID"), movementMediator);
 
         TileContainer entityTile = this.movementMediator.getTileIDMap().get(( (Long) entityData.get("START_TILE_ID")).intValue());
 

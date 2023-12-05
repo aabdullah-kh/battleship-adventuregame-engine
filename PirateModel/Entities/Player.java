@@ -18,22 +18,25 @@ public class Player extends Entity{
 
     @Override
     public void nextMove() {
-        String move = PirateGame.getInput();
+        boolean command_valid = false;
+        while (!command_valid) {
+            String move = PirateGame.getInput();
 
-        String[] command = move.split(" ");
+            String[] command = move.split(" ");
 
-        switch (command[0]) {
-            case "MOVE" -> {
-                move(command[1]);
-            }
-            case "FIRE" -> {
+            switch (command[0]) {
+                case "MOVE" -> {
+                    command_valid = move(command[1]);
+                }
+                case "FIRE" -> {
 
-            }
-            case "RETREAT" -> {
+                }
+                case "RETREAT" -> {
 
-            }
-            default -> {
+                }
+                default -> {
 
+                }
             }
         }
 
