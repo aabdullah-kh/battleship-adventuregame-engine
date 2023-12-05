@@ -1,5 +1,6 @@
 import PirateModel.GameLoader;
 import PirateModel.Grid;
+import PirateModel.PirateGame;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
@@ -22,8 +23,7 @@ public class LoaderTest {
     @Test
     void loadEntitiesTest() throws IOException, ParseException {
         GameLoader gl = new GameLoader("ExampleGame");
-        Grid grid = gl.loadGrid("MainGrid");
-        gl.loadEntities();
-        assertEquals(1, gl.getMovementMediator().getTileEntities().get(grid.getTileContainer(3, 3).getID()).size());
+        PirateGame game = gl.loadGame();
+        assertEquals(1, gl.getMovementMediator().getTileEntities().get(game.getMap().getTileContainer(3, 3).getID()).size());
     }
 }

@@ -2,6 +2,7 @@ package PirateModel;
 
 import PirateModel.Entities.Entity;
 import PirateModel.Entities.NPC;
+import PirateModel.Entities.Player;
 import PirateModel.Entities.StoryNPC;
 import PirateModel.Tiles.*;
 import org.json.simple.JSONArray;
@@ -33,12 +34,13 @@ public class GameLoader {
         movementMediator = new MovementMediator();
     }
 
-    public PirateGame loadGame() {
-        // TODO: Add loadGame functionality - needs PirateGame implemented first
-        throw new UnsupportedOperationException("Not implemented!");
+    public PirateGame loadGame() throws IOException, ParseException {
+        Grid mainGrid = loadGrid("MainGrid");
+        loadEntities();
+        PirateGame game = new PirateGame(mainGrid, movementMediator, loadPlayer());
+
+        return game;
     }
-
-
 
     public Grid loadGrid(String path) throws IOException, ParseException {   //TODO: MovementMediator integration
         String gridJSON = loadJSON(gamePath + "/" + path + "/grid.json");
@@ -73,7 +75,24 @@ public class GameLoader {
         }
         return newGrid;
     }
-    public void loadEntities() throws IOException, ParseException {
+
+    private Entity loadPlayer() throws IOException, ParseException {    //TODO SHIPS!!!!
+        String entityJSON = loadJSON(gamePath + "/player.json");
+        JSONParser parser = new JSONParser();
+        JSONObject entityData = (JSONObject) parser.parse(entityJSON);
+
+        Entity player = new Player("Player", movementMediator);
+
+        TileContainer entityTile = this.movementMediator.getTileIDMap().get(( (Long) entityData.get("START_TILE_ID")).intValue());
+
+        this.movementMediator.getEntityTiles().put((String) entityData.get("ID"), entityTile);
+
+        this.movementMediator.getTileEntities().get(( (Long) entityData.get("START_TILE_ID")).intValue()).add(player);
+
+        return player;
+    }
+
+    private void loadEntities() throws IOException, ParseException {
         String entityJSON = loadJSON(gamePath + "/entities.json");
         JSONParser parser = new JSONParser();
         JSONArray entityArr = (JSONArray) parser.parse(entityJSON);
@@ -83,7 +102,7 @@ public class GameLoader {
 
             Entity newEntity;
 
-            switch ((String) entityData.getOrDefault("TYPE", "NPC")) {
+            switch ((String) entityData.getOrDefault("TYPE", "NPC")) {  // TODO: Ships???
                 case "NPC" -> newEntity = new NPC((String) entityData.get("ID"), this.movementMediator);
                 case "STORYNPC" -> newEntity = new StoryNPC((String) entityData.get("ID"), this.movementMediator);
                 default -> newEntity = new NPC((String) entityData.get("ID"), this.movementMediator);
