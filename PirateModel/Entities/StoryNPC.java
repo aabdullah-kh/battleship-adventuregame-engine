@@ -10,7 +10,7 @@ public class StoryNPC extends NPC {
     An NPC that progresses the story
      */
 
-    public StoryNPC(String ID, TileContainer currentTile, MovementMediator mover, Ship ship, Entity player)  {
-        super(ID, currentTile, mover, ship, player);
+    public StoryNPC(String ID, MovementMediator mover, Ship ship, Entity player)  {
+        super(ID, mover, ship, player);
     }
 }

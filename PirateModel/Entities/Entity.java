@@ -18,13 +18,15 @@ public abstract class Entity {
     public Entity(String ID, MovementMediator mover) {
         this.ID = ID;
         this.mover = mover;
-        inventory = new Inventory();
+        this.inventory = new Inventory();
         //ship = new Caravel();
     }
 
     public Entity(String ID, MovementMediator mover, Inventory inventory, Ship ship) {
         this.ID = ID;
         this.mover = mover;
+        this.inventory = inventory;
+        this.ship = ship;
     }
 
     public String getID() {
@@ -40,14 +42,16 @@ public abstract class Entity {
     }
 
     public boolean changeShip(Ship ship) {
-        throw new UnsupportedOperationException("Not implemented!");
+        this.ship = ship;
+        return true;
     }
 
     public boolean move(String dir) {
-        return mover.receiveNotification(this, dir);
+        return (boolean) mover.receiveNotification(this, dir);
     }
 
     public abstract void nextMove();
+
 
     public TileContainer getTileContainer() {
         return mover.getEntityTiles().get(ID);

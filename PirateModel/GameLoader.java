@@ -1,9 +1,7 @@
 package PirateModel;
 
-import PirateModel.Entities.Entity;
-import PirateModel.Entities.NPC;
-import PirateModel.Entities.Player;
-import PirateModel.Entities.StoryNPC;
+import PirateModel.Entities.*;
+import PirateModel.Ships.*;
 import PirateModel.Tiles.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -23,6 +21,8 @@ public class GameLoader {
 
     MovementMediator movementMediator;
 
+    Entity player;
+
     public GameLoader(String gamePath) throws IOException, ParseException {
         this.gamePath = gamePath;
 
@@ -36,8 +36,9 @@ public class GameLoader {
 
     public PirateGame loadGame() throws IOException, ParseException {
         Grid mainGrid = loadGrid("MainGrid");
+        this.player = loadPlayer();
         loadEntities();
-        PirateGame game = new PirateGame(mainGrid, movementMediator, loadPlayer());
+        PirateGame game = new PirateGame(mainGrid, movementMediator, player);
 
         return game;
     }
@@ -81,7 +82,16 @@ public class GameLoader {
         JSONParser parser = new JSONParser();
         JSONObject entityData = (JSONObject) parser.parse(entityJSON);
 
-        Entity player = new Player((String) entityData.get("ID"), movementMediator);
+        Ship ship;
+        switch ((String) entityData.getOrDefault("SHIP", "CARAVEL")) {
+            case "CARAVEL" -> ship = new Caravel();
+            case "BARQUE" -> ship = new Barque();
+            case "GALLEY" -> ship = new Galley();
+            case "GALLEON" -> ship = new Galleon();
+            default -> ship = null;
+        }
+
+        Entity player = new Player((String) entityData.get("ID"), movementMediator, new Inventory(), ship);
 
         TileContainer entityTile = this.movementMediator.getTileIDMap().get(( (Long) entityData.get("START_TILE_ID")).intValue());
 
@@ -102,10 +112,20 @@ public class GameLoader {
 
             Entity newEntity;
 
-            switch ((String) entityData.getOrDefault("TYPE", "NPC")) {  // TODO: Ships???
-                case "NPC" -> newEntity = new NPC((String) entityData.get("ID"), this.movementMediator);
-                case "STORYNPC" -> newEntity = new StoryNPC((String) entityData.get("ID"), this.movementMediator);
-                default -> newEntity = new NPC((String) entityData.get("ID"), this.movementMediator);
+            //get Ship
+            Ship ship;
+            switch ((String) entityData.getOrDefault("SHIP", "CARAVEL")) {
+                case "CARAVEL" -> ship = new Caravel();
+                case "BARQUE" -> ship = new Barque();
+                case "GALLEY" -> ship = new Galley();
+                case "GALLEON" -> ship = new Galleon();
+                default -> ship = null;
+            }
+
+            switch ((String) entityData.getOrDefault("TYPE", "NPC")) {
+                case "NPC" -> newEntity = new NPC((String) entityData.get("ID"), this.movementMediator, ship, player);
+                case "STORYNPC" -> newEntity = new StoryNPC((String) entityData.get("ID"), this.movementMediator, ship, player);
+                default -> newEntity = new NPC((String) entityData.get("ID"), this.movementMediator, ship, player);
             }
 
             TileContainer entityTile = this.movementMediator.getTileIDMap().get(( (Long) entityData.get("START_TILE_ID")).intValue());

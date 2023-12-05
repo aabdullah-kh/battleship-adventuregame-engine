@@ -22,8 +22,8 @@ public class NPC extends Entity{
                             "NE", "NW", "SE", "SW"}; // the possible moves that an NPC can make
     private Entity player;
 
-    public NPC(String ID, TileContainer currentTile, MovementMediator mover, Ship ship, Entity player) {
-        super(ID, currentTile, mover, new Inventory(), ship);
+    public NPC(String ID, MovementMediator mover, Ship ship, Entity player) {
+        super(ID, mover, new Inventory(), ship);
         this.player = player;
     }
 
@@ -50,7 +50,7 @@ public class NPC extends Entity{
         else {
 
             // get player tile xy pos
-            TileContainer playerTile = player.getCurrentTile();
+            TileContainer playerTile = player.getTileContainer();
 
             int x = playerTile.getXPos();
             int y = playerTile.getYPos();
@@ -78,7 +78,7 @@ public class NPC extends Entity{
             }
 
             // CHANGE THIS LINE IF SHOOT IS CHANGED
-            this.getShip().shoot(player, x, y);
+            //this.getShip().shoot(player, x, y);
 
 
 //                OLD IMPLEMENTATION WITH CLASSIC BATTLESHIP IDEA (PLAYER AND NPC CANNOT SEE EACH OTHER)
