@@ -79,20 +79,5 @@ public class Ship {
     public int getDamage() {
         return this.damage;
     }
-
-//    /**
-//     * Shoot the NPC at the x and y coordinate.
-//     * Return true if the NPC has been hit and false otherwise.
-//     *
-//     * @param entity: The NPC
-//     * @param x:      The x-coordinate.
-//     * @param y:      The y-coordinate.
-//     * @return boolean depending on if there was a hit or not.
-//     */
-//    public boolean shoot(Entity entity, int x, int y) {
-//        Ship NPCShip = entity.getShip();
-//
-//        return (NPCShip.getXCoord() == x && NPCShip.getYCoord() == y);
-//    }
-
+    
 }
