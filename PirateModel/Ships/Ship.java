@@ -1,42 +1,32 @@
 package PirateModel.Ships;
 
-import PirateModel.Entities.Entity;
+public abstract class Ship {
 
-public class Ship {
+    protected int xCoord;
 
-    private int xCoord;
+    protected int yCoord;
 
-    private int yCoord;
+    protected String name;
 
-    private String name;
+    protected int health;
 
-    private int health;
+    protected int damage;
 
-    private int damage;
+    public String getStats() {
+        throw new UnsupportedOperationException("Not implemented!");
+    }
 
-    public String getName() {
-        return this.name;
+    public abstract boolean shoot(int x, int y);
+
+    public void modifyDamage(int damageBoostAmount) {
+        this.damage += damageBoostAmount;
+    }
+
+    public void modifyHealth(int healthIncrease) {
+        this.health += healthIncrease;
     }
 
     public int getHealth() {
-        return this.health;
-    }
-
-    public int getDamage() {
-        return this.damage;
-    }
-
-    public boolean shoot(Entity entity, int x, int y) {
-        Ship NPCShip = entity.getShip();
-
-        return (NPCShip.getXCoord() == x && NPCShip.getYCoord() == y);
-    }
-
-    public int getXCoord() {
-        return this.xCoord;
-    }
-
-    public int getYCoord() {
-        return this.yCoord;
+        return  this.health;
     }
 }

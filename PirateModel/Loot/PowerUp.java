@@ -1,14 +1,14 @@
 package PirateModel.Loot;
 
-public abstract class PowerUp extends UsableItem {
+import PirateModel.Ships.Ship;
 
-    // Additional fields specific to PowerUp, if any
-    // Example: private int powerLevel;
+public abstract class PowerUp {
 
-    public PowerUp(String name, String description, int value) {
-        super(value);
+    public PowerUp() {
+        // Constructor logic if needed
     }
 
-    @Override
-    public abstract void useItem();
+    // Abstract method to apply the power-up effect on a ship
+    public abstract void applyEffect(Ship ship);
 }
+
