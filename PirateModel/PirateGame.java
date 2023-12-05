@@ -55,6 +55,10 @@ public class PirateGame {
 
     }
 
+    public Entity getPlayer() {
+        return this.player;
+    }
+
     /**
      * Handles input.
      * @return inputted string.

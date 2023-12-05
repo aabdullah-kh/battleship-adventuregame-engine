@@ -2,6 +2,7 @@ package views;
 
 import PirateModel.Entities.Entity;
 import PirateModel.Entities.Player;
+import PirateModel.PirateGame;
 import PirateModel.Ships.Ship;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
@@ -24,25 +25,24 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.scene.AccessibleRole;
 
-public class PirateGameView extends Application{
+public class PirateGameView {
 
-    Entity player;
-    public static void main(String[] args) {
-        launch(args);
+    PirateGame game;
+
+    Stage stage;
+    public PirateGameView(PirateGame game, Stage stage) {
+        this.game = game;
+        this.stage = stage;
+        initUI();
     }
+    public void initUI() {
+        Ship ship = this.game.getPlayer().getShip();
 
-    public PirateGameView(Entity player) {
-        this.player = player;
-    }
-    @Override
-    public void start(Stage stage) throws Exception {
-        Ship ship = this.player.getShip();
+        String shipName = "GALLEON";
+        int health = 1;
+        int damage = 2;
 
-        String shipName = ship.getName();
-        int health = ship.getHealth();
-        int damage = ship.getDamage();
-
-        stage.setTitle("Pirate Game");
+        stage.setTitle("Swashbuckler’s Gambit");
 
         GridPane gridPane = new GridPane();
 

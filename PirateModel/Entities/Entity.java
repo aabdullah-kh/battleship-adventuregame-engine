@@ -70,5 +70,6 @@ public abstract class Entity {
     public boolean shoot(Entity entity, int x, int y) {
         Grid grid = entity.mover.getTileGrid().get(getTileContainer().getID());
         grid.getTileContainer(x, y);
+        return true;
     }
 }
