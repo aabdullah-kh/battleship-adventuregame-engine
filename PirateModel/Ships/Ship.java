@@ -17,7 +17,7 @@ public class Ship {
     /**
      * The Ship cannons damage per shot.
      */
-    private final int damage;
+    private int damage;
 
 
     /**
@@ -51,6 +51,14 @@ public class Ship {
      */
     public void addHealth(int health) {
         this.health += health;
+    }
+
+    /**
+     * Add the Ship's damage from the damage argument.
+     * @param damage: The damage to be increased from the Ship's damage.
+     */
+    public void addDamage(int damage) {
+        this.damage += damage;
     }
 
     /**

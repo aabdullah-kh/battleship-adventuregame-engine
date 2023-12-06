@@ -13,7 +13,7 @@ public class DamageBuffPowerUp extends PowerUp {
     @Override
     public void applyEffect(Ship ship) {
         if (ship != null) {
-            ship.modifyDamage(damageBoostAmount);
+            ship.addDamage(damageBoostAmount);
         } else {
             throw new IllegalArgumentException("Ship is null in DamageBoostPowerUp");
         }

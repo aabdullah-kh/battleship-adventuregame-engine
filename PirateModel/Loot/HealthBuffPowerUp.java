@@ -15,7 +15,7 @@ public class HealthBuffPowerUp extends PowerUp {
         if (ship != null) {
             int currentHealth = ship.getHealth();
             int healthIncrease = currentHealth * healthBoostPercentage / 100;
-            ship.modifyHealth(healthIncrease);
+            ship.addHealth(healthIncrease);
         } else {
             throw new IllegalArgumentException("Ship is null in HealthBoostPowerUp");
         }
