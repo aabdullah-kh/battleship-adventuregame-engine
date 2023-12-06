@@ -9,6 +9,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * Class PirateGame
+ * ---------------------
+ * Contains the main game loop.
+ *
+ */
 public class PirateGame {
 
     private String directoryName;
@@ -18,6 +24,7 @@ public class PirateGame {
     private Entity player;
 
     private MovementMediator movementMediator;
+
 
     public PirateGame(Grid map, MovementMediator movementMediator, Entity player) {
         this.map = map;
@@ -76,7 +83,17 @@ public class PirateGame {
         String gridD = "";
         for(int i = 0; i < grid.getSizeY(); i++) {
             for(int j = 0; j < grid.getSizeX(); j++) {
-                gridD = gridD.concat(Character.toString(grid.getTileContainer(j, i).getTile().getSymbol()));
+
+                Character symbol;
+                if (player.getMover().getTileEntities().get(grid.getTileContainer(j, i).getID()).isEmpty()) {
+                    symbol = grid.getTileContainer(j, i).getTile().getSymbol();
+                } else if (player.getMover().getEntityTiles().get("PLAYER").getID() == grid.getTileContainer(j, i).getID()) {
+                    symbol = '&';
+                } else {
+                    symbol = '!';
+                }
+
+                gridD = gridD.concat(String.valueOf(symbol));
             }
             gridD = gridD.concat("\n");
         }

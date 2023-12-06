@@ -34,7 +34,7 @@ public class NPC extends Entity{
 
         // randomly decide whether to shoot or move
         Random r = new Random();
-        int move = r.nextInt(2);
+        int move = r.nextInt(3);
 
         // the NPC moves ship
         if (move == 0) {
