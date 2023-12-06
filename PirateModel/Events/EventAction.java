@@ -1,22 +1,35 @@
 package PirateModel.Events;
 
 import PirateModel.Entities.Entity;
+import PirateModel.PirateGame;
+import PirateModel.TileContainer;
+import org.json.simple.parser.ParseException;
 
-public abstract class Action {
+import java.io.IOException;
+
+public abstract class EventAction {
     // Attributes
     private String label;
+
     private boolean forcedAction;
+
     private boolean hidden;
 
+    protected PirateGame gameController;
+
+    protected TileContainer tileContainer;
+
     // Constructor (optional, depending on your needs)
-    public Action(String label, boolean forcedAction, boolean hidden) {
+    public EventAction(String label, boolean forcedAction, boolean hidden, PirateGame gameController) {
         this.label = label;
         this.forcedAction = forcedAction;
         this.hidden = hidden;
+        this.gameController = gameController;
+        this.tileContainer = tileContainer;
     }
 
     // Public methods
-    public abstract void execute(Entity entity);
+    public abstract void execute(Entity entity) throws IOException, ParseException;
 
     public String getLabel() {
         // Return label based on entity, if needed

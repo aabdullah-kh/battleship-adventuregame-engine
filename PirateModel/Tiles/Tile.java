@@ -26,4 +26,12 @@ public abstract class Tile {
     public boolean isShipAccessible() {
         return shipAccessible;
     }
+
+    public String getName() { return Name; }
+
+    public char getSymbol() { return SYMBOL; }
+
+    public Event getEvent() { return event; }
+
+    public void setEvent(Event event) { this.event = event; }
 }

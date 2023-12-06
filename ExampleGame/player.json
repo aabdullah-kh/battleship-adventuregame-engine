@@ -1,0 +1,7 @@
+{
+  "ID": "PLAYER",
+  "TYPE": "PLAYER",
+  "INVENTORY": [],
+  "START_TILE_ID": 1,
+  "SHIP": "CARAVEL"
+}

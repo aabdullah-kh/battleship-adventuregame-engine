@@ -4,39 +4,88 @@ import PirateModel.Entities.Entity;
 
 public class Ship {
 
-    private int xCoord;
+    /**
+     * The name of the Ship.
+     */
+    private final String name;
 
-    private int yCoord;
-
-    private String name;
-
+    /**
+     * The Ship's current health.
+     */
     private int health;
 
+    /**
+     * The Ship cannons damage per shot.
+     */
     private int damage;
 
+
+    /**
+     * Ship constructor.
+     * __________________________
+     * Initializes attributes.
+     *
+     * @param name:   the Ship's name.
+     * @param health: the Ship's health.
+     * @param damage: the Ship's damage.
+     */
+    public Ship(String name, int health, int damage) {
+        this.name = name;
+        this.health = health;
+        this.damage = damage;
+    }
+
+    /**
+     * Return the name of the Ship.
+     *
+     * @return String representation of the name.
+     */
     public String getName() {
         return this.name;
     }
 
-    public int getHealth() {
-        return this.health;
+    /**
+     * Add the Ship's health from the health argument.
+     *
+     * @param health: The health to be increased from the Ship's health
+     */
+    public void addHealth(int health) {
+        this.health += health;
     }
 
+    /**
+     * Add the Ship's damage from the damage argument.
+     * @param damage: The damage to be increased from the Ship's damage.
+     */
+    public void addDamage(int damage) {
+        this.damage += damage;
+    }
+
+    /**
+     * Subtract the Ship's health from the health argument.
+     *
+     * @param health: The health to be decreased from the Ship's health.
+     */
+    public void subtractHealth(int health) {
+        this.health -= health;
+    }
+
+    /**
+     * Return the Ship's damage per shot fired.
+     *
+     * @return int representation of the Ship's damage.
+     */
     public int getDamage() {
         return this.damage;
     }
 
-    public boolean shoot(Entity entity, int x, int y) {
-        Ship NPCShip = entity.getShip();
-
-        return (NPCShip.getXCoord() == x && NPCShip.getYCoord() == y);
+    /**
+     * Return the Ship's current health.
+     *
+     * @return int representation of the Ship's health.
+     */
+    public int getHealth() {
+        return this.health;
     }
 
-    public int getXCoord() {
-        return this.xCoord;
-    }
-
-    public int getYCoord() {
-        return this.yCoord;
-    }
 }
